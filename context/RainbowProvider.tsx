@@ -26,7 +26,7 @@ export default function RainbowProvider({children}: { children: React.ReactNode 
     return (
         <WagmiProvider config={config}>
             <QueryClientProvider client={queryClient}>
-                <RainbowKitProvider>
+                <RainbowKitProvider locale={"en"}>
                     {children}
                 </RainbowKitProvider>
             </QueryClientProvider>

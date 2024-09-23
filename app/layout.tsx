@@ -3,6 +3,7 @@ import "./globals.css";
 import '@rainbow-me/rainbowkit/styles.css';
 import RainbowProvider from "@/context/RainbowProvider";
 import React from "react";
+import Banner from "@/components/banner/banner";
 
 export const metadata: Metadata = {
     title: "Palette",
@@ -18,6 +19,7 @@ export default function RootLayout({
         <html lang="en">
         <body>
         <RainbowProvider>
+            <Banner/>
             {children}
         </RainbowProvider>
         </body>
