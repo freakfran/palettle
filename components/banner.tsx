@@ -14,14 +14,21 @@ import {usePathname} from "next/navigation";
 export default function Banner() {
     const pathname = usePathname();
     return (
-        <NavigationMenu className="p-2 max-w-full">
+        <NavigationMenu className="fixed p-2 max-w-full">
             <NavigationMenuList className="flex w-screen flex-row items-start justify-start">
                 <NavigationMenuItem className="flex-1 pl-20 cursor-pointer">
-                    <Link href="/" legacyBehavior passHref>
+                    <Link href="/public" legacyBehavior passHref>
                         <Image src="/logo.png" alt='logo' width='50' height='50'/>
                     </Link>
                 </NavigationMenuItem>
                 <div className="flex-1 flex justify-center space-x-4 pl-52">
+                    <NavigationMenuItem>
+                        <Link href="/public" legacyBehavior passHref>
+                            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                                Home
+                            </NavigationMenuLink>
+                        </Link>
+                    </NavigationMenuItem>
                     <NavigationMenuItem>
                         <Link href="/arts" legacyBehavior passHref>
                             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
