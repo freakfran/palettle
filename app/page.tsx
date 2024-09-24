@@ -1,10 +1,64 @@
 import {Input} from "@/components/ui/input";
 import {Search} from "lucide-react";
 import SearchBar from "@/components/search-bar";
-import PicCard from "@/components/pic-card";
+import PicCard, {PicCardProps} from "@/components/pic-card";
+import MoveCarousel from "@/components/move-carousel";
 
 export default function Home() {
-    const backgroundUrl = './bg-index.png'
+    const backgroundUrl = './bg-index.png';
+    const arts: PicCardProps[] = [
+        {
+            image: 'https://i0.hdslb.com/bfs/new_dyn/a43a2be254e0c64de608de3cbfbc1e5f379292351.jpg@1052w_!web-dynamic.avif',
+            title: '初音未来',
+            tag: 'miku',
+            price: '10',
+            author: '极夜繁声',
+            authorImg: 'https://i2.hdslb.com/bfs/face/ae3de0cc8211ca2141e821615397464ddd6e9b62.jpg'
+        },
+        {
+            image: 'https://i0.hdslb.com/bfs/new_dyn/a43a2be254e0c64de608de3cbfbc1e5f379292351.jpg@1052w_!web-dynamic.avif',
+            title: '初音未来',
+            tag: 'miku',
+            price: '10',
+            author: '极夜繁声',
+            authorImg: 'https://i2.hdslb.com/bfs/face/ae3de0cc8211ca2141e821615397464ddd6e9b62.jpg'
+        },
+        {
+            image: 'https://i0.hdslb.com/bfs/new_dyn/a43a2be254e0c64de608de3cbfbc1e5f379292351.jpg@1052w_!web-dynamic.avif',
+            title: '初音未来',
+            tag: 'miku',
+            price: '10',
+            author: '极夜繁声',
+            authorImg: 'https://i2.hdslb.com/bfs/face/ae3de0cc8211ca2141e821615397464ddd6e9b62.jpg'
+        },
+        {
+            image: 'https://i0.hdslb.com/bfs/new_dyn/a43a2be254e0c64de608de3cbfbc1e5f379292351.jpg@1052w_!web-dynamic.avif',
+            title: '初音未来',
+            tag: 'miku',
+            price: '10',
+            author: '极夜繁声',
+            authorImg: 'https://i2.hdslb.com/bfs/face/ae3de0cc8211ca2141e821615397464ddd6e9b62.jpg'
+        },
+        {
+            image: 'https://i0.hdslb.com/bfs/new_dyn/a43a2be254e0c64de608de3cbfbc1e5f379292351.jpg@1052w_!web-dynamic.avif',
+            title: '初音未来',
+            tag: 'miku',
+            price: '10',
+            author: '极夜繁声',
+            authorImg: 'https://i2.hdslb.com/bfs/face/ae3de0cc8211ca2141e821615397464ddd6e9b62.jpg'
+        },
+        {
+            image: 'https://i0.hdslb.com/bfs/new_dyn/a43a2be254e0c64de608de3cbfbc1e5f379292351.jpg@1052w_!web-dynamic.avif',
+            title: '初音未来',
+            tag: 'miku',
+            price: '10',
+            author: '极夜繁声',
+            authorImg: 'https://i2.hdslb.com/bfs/face/ae3de0cc8211ca2141e821615397464ddd6e9b62.jpg'
+        },
+
+
+    ]
+
     return (
         <section
             className="overflow-hidden relative min-h-[100vh]
@@ -23,13 +77,7 @@ export default function Home() {
                     </div>
                 </div>
                 <div className="flex flex-wrap h-1/2 bg-transparent">
-                    <PicCard
-                        image={'https://i0.hdslb.com/bfs/new_dyn/a43a2be254e0c64de608de3cbfbc1e5f379292351.jpg@1052w_!web-dynamic.avif'}
-                        title={'miku'}
-                        tag={'初音未来'}
-                        price={'10'}
-                        author={'极夜繁声'}
-                        authorImg={'https://i2.hdslb.com/bfs/face/ae3de0cc8211ca2141e821615397464ddd6e9b62.jpg'}/>
+                    <MoveCarousel items={arts}/>
                 </div>
             </div>
         </section>

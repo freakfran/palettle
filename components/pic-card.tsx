@@ -1,7 +1,6 @@
 import Image from "next/image";
-import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
 
-interface PicCardProps {
+export interface PicCardProps {
     image: string,
     title: string,
     tag: string,
@@ -15,7 +14,7 @@ export default function PicCard({image, title, tag, price, author, authorImg}: P
     return (
         <div
             className="bg-white relative flex flex-col break-words p-[20px]
-                rounded-lg shadow-lg"
+                rounded-lg shadow-lg max-w-[250px]"
         >
             <div className="rounded-full bg-[rgba(238,87,76,0.3)]
                 text-[#ee574c] text-[0.75em] font-bold p-2 w-fit ml-auto mb-2"
