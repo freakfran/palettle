@@ -8,6 +8,8 @@ interface MoveCarouselProps {
     items: PicCardProps[]
 }
 
+
+
 export default function MoveCarousel({items}: MoveCarouselProps) {
     const plugin = React.useRef(
         Autoplay({
