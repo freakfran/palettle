@@ -1,4 +1,3 @@
-'use client'
 import {
     NavigationMenu,
     NavigationMenuItem,
@@ -9,12 +8,10 @@ import {
 import Link from "next/link";
 import {ConnectButton} from "@rainbow-me/rainbowkit";
 import Image from "next/image";
-import {usePathname} from "next/navigation";
 
 export default function Banner() {
-    const pathname = usePathname();
     return (
-        <NavigationMenu className="fixed p-2 max-w-full">
+        <NavigationMenu className="fixed p-2 max-w-full bg-white drop-shadow-sm">
             <NavigationMenuList className="flex w-screen flex-row items-start justify-start">
                 <NavigationMenuItem className="flex-1 pl-20 cursor-pointer">
                     <Link href="/public" legacyBehavior passHref>
