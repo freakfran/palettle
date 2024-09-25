@@ -7,6 +7,7 @@ import CollectionCard, {CollectionCardProps} from "@/components/collection-card"
 import CreatorCarousel from "@/components/creator-carousel";
 import {CreatorProps} from "@/components/creator";
 
+
 /**
  * 搜索框+轮播图
  */
@@ -91,7 +92,19 @@ function renderTop() {
 
 function renderArtworks() {
     return (
-        <section className="bg-[#f8f9fc] h-screen">
+        <section className="bg-[#f8f9fc] py-20 relative px-6">
+            <div className="container">
+                <div className="flex justify-between">
+                    <div className="p-0 relative shrink-0 w-full max-w-full	mt-auto">
+                        <nav className="my-12">
+                            <div className="my-4 float-left ">
+                                <h2 className="font-bold text-2xl">Explore</h2>
+                            </div>
+                        </nav>
+                        </div> 
+                </div>
+            </div>
+            
         </section>
     )
 }
