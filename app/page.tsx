@@ -4,6 +4,8 @@ import SearchBar from "@/components/search-bar";
 import PicCard, {PicCardProps} from "@/components/pic-card";
 import MoveCarousel from "@/components/move-carousel";
 import CollectionCard, {CollectionCardProps} from "@/components/collection-card";
+import CreatorCarousel from "@/components/creator-carousel";
+import {CreatorProps} from "@/components/creator";
 
 /**
  * 搜索框+轮播图
@@ -94,6 +96,9 @@ function renderArtworks() {
     )
 }
 
+/**
+ * 作品集
+ */
 function renderCollections() {
     const collections: CollectionCardProps[] = [
         {
@@ -154,17 +159,91 @@ function renderCollections() {
     )
 }
 
+/**
+ * 作者
+ */
+function renderCreators() {
+    const creators: CreatorProps[] = [
+        {
+            image: 'https://i0.hdslb.com/bfs/face/ae3de0cc8211ca2141e821615397464ddd6e9b62.jpg',
+            name: '极夜繁声',
+            value: '1.5 ETH'
+        },
+        {
+            image: 'https://i0.hdslb.com/bfs/face/ae3de0cc8211ca2141e821615397464ddd6e9b62.jpg',
+            name: '极夜繁声',
+            value: '1.5 ETH'
+        },
+        {
+            image: 'https://i0.hdslb.com/bfs/face/ae3de0cc8211ca2141e821615397464ddd6e9b62.jpg',
+            name: '极夜繁声',
+            value: '1.5 ETH'
+        },
+        {
+            image: 'https://i0.hdslb.com/bfs/face/ae3de0cc8211ca2141e821615397464ddd6e9b62.jpg',
+            name: '极夜繁声',
+            value: '1.5 ETH'
+        },
+        {
+            image: 'https://i0.hdslb.com/bfs/face/ae3de0cc8211ca2141e821615397464ddd6e9b62.jpg',
+            name: '极夜繁声',
+            value: '1.5 ETH'
+        },
+        {
+            image: 'https://i0.hdslb.com/bfs/face/ae3de0cc8211ca2141e821615397464ddd6e9b62.jpg',
+            name: '极夜繁声',
+            value: '1.5 ETH'
+        },
+        {
+            image: 'https://i0.hdslb.com/bfs/face/ae3de0cc8211ca2141e821615397464ddd6e9b62.jpg',
+            name: '极夜繁声',
+            value: '1.5 ETH'
+        },
+        {
+            image: 'https://i0.hdslb.com/bfs/face/ae3de0cc8211ca2141e821615397464ddd6e9b62.jpg',
+            name: '极夜繁声',
+            value: '1.5 ETH'
+        },
+        {
+            image: 'https://i0.hdslb.com/bfs/face/ae3de0cc8211ca2141e821615397464ddd6e9b62.jpg',
+            name: '极夜繁声',
+            value: '1.5 ETH'
+        },
+        {
+            image: 'https://i0.hdslb.com/bfs/face/ae3de0cc8211ca2141e821615397464ddd6e9b62.jpg',
+            name: '极夜繁声',
+            value: '1.5 ETH'
+        },
+    ]
+
+
+    return (
+        <section className="p-[120px] bg-[#f8f9fc]">
+            <div className="container">
+                <div className="flex justify-between">
+                    <div>
+                        <h2 className="font-bold text-4xl">Artists</h2>
+                    </div>
+                </div>
+                <CreatorCarousel className="mt-12" creators={creators}/>
+            </div>
+        </section>
+    )
+}
+
 
 export default function Home() {
     const Top = renderTop();
     const Artworks = renderArtworks();
     const Collections = renderCollections();
+    const Creators = renderCreators();
 
     return (
         <>
             {Top}
             {Artworks}
             {Collections}
+            {Creators}
         </>
 
     )
