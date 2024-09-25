@@ -6,6 +6,8 @@ import MoveCarousel from "@/components/move-carousel";
 import CollectionCard, {CollectionCardProps} from "@/components/collection-card";
 import CreatorCarousel from "@/components/creator-carousel";
 import {CreatorProps} from "@/components/creator";
+import Tabspanel from "@/components/tabspanel";
+
 
 
 /**
@@ -100,12 +102,15 @@ function renderArtworks() {
                             <div className="my-4 float-left ">
                                 <h2 className="font-bold text-2xl">Explore</h2>
                             </div>
+                            <div>
+                                <Tabspanel/>
+                            </div>
                         </nav>
                         </div> 
                 </div>
             </div>
-            
         </section>
+        
     )
 }
 
