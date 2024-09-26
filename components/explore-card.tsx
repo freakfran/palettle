@@ -5,8 +5,8 @@ export interface ExploreCardProps {
   authorImg: string;
   image: string;
   title: string;
-  stock: number;
-  price: number;
+  stock: string;
+  price: string;
 }
 
 export default function ExploreCard({
@@ -23,15 +23,13 @@ export default function ExploreCard({
         <div className="items-center justify-start flex-row flex ">
           <div className="h-8 w-8">
             <Image
-              src={image}
-              alt={title}
-              className="img-fluid rounded-circle"
+              src={image} alt={title} width={400} height={300}
             />
           </div>
           <h6 className="mb-0 ms-2 fw-semibold text-muted f-14">{author}</h6>
         </div>
         <div className="card-image mt-3">
-          <Image src={authorImg} alt="" className="img-fluid" />
+          <Image src={image} alt={title} width={400} height={300} />
         </div>
         <div className="body-content mt-3">
           <h6 className="fw-bold">{title}</h6>

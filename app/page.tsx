@@ -7,6 +7,7 @@ import CollectionCard, {CollectionCardProps} from "@/components/collection-card"
 import CreatorCarousel from "@/components/creator-carousel";
 import {CreatorProps} from "@/components/creator";
 import Tabspanel from "@/components/tabspanel";
+import { ExploreCardProps } from "@/components/explore-card";
 
 
 
@@ -93,17 +94,68 @@ function renderTop() {
 }
 
 function renderArtworks() {
+    const arts: ExploreCardProps[] = [
+        {
+            author: '_犬野子',
+            authorImg: 'https://p3-pc.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-i-0813c001_okm6WAK6rCArtDIkClebACg1rs5AOTEe9AnKAq.jpeg?from=327834062',
+            image: 'https://cdn.britannica.com/04/95904-050-7EB39FC8/Last-Supper-wall-painting-restoration-Leonardo-da-1999.jpg',
+            title: '芙莉莲',
+            stock: '100',
+            price: '100',
+            
+        },
+        {
+            author: '_犬野子',
+            authorImg: 'https://p3-pc.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-i-0813c001_okm6WAK6rCArtDIkClebACg1rs5AOTEe9AnKAq.jpeg?from=327834062',
+            image: 'https://cdn.britannica.com/04/95904-050-7EB39FC8/Last-Supper-wall-painting-restoration-Leonardo-da-1999.jpg',
+            title: '芙莉莲',
+            stock: '100',
+            price: '100',
+            
+        },        {
+            author: '_犬野子',
+            authorImg: 'https://p3-pc.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-i-0813c001_okm6WAK6rCArtDIkClebACg1rs5AOTEe9AnKAq.jpeg?from=327834062',
+            image: 'https://cdn.britannica.com/04/95904-050-7EB39FC8/Last-Supper-wall-painting-restoration-Leonardo-da-1999.jpg',
+            title: '芙莉莲',
+            stock: '100',
+            price: '100',
+            
+        },        {
+            author: '_犬野子',
+            authorImg: 'https://p3-pc.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-i-0813c001_okm6WAK6rCArtDIkClebACg1rs5AOTEe9AnKAq.jpeg?from=327834062',
+            image: 'https://cdn.britannica.com/04/95904-050-7EB39FC8/Last-Supper-wall-painting-restoration-Leonardo-da-1999.jpg',
+            title: '芙莉莲',
+            stock: '100',
+            price: '100',
+            
+        },        {
+            author: '_犬野子',
+            authorImg: 'https://p3-pc.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-i-0813c001_okm6WAK6rCArtDIkClebACg1rs5AOTEe9AnKAq.jpeg?from=327834062',
+            image: 'https://cdn.britannica.com/04/95904-050-7EB39FC8/Last-Supper-wall-painting-restoration-Leonardo-da-1999.jpg',
+            title: '芙莉莲',
+            stock: '100',
+            price: '100',
+            
+        },        {
+            author: '_犬野子',
+            authorImg: 'https://p3-pc.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-i-0813c001_okm6WAK6rCArtDIkClebACg1rs5AOTEe9AnKAq.jpeg?from=327834062',
+            image: 'https://cdn.britannica.com/04/95904-050-7EB39FC8/Last-Supper-wall-painting-restoration-Leonardo-da-1999.jpg',
+            title: '芙莉莲',
+            stock: '100',
+            price: '100',
+            
+        }]
     return (
         <section className="bg-[#f8f9fc] py-20 relative px-6">
             <div className="container">
                 <div className="flex justify-between">
                     <div className="p-0 relative shrink-0 w-full max-w-full	mt-auto">
-                        <nav className="my-12">
+                        <nav className="my-12 w-1/2">
                             <div className="my-4 float-left ">
                                 <h2 className="font-bold text-2xl">Explore</h2>
                             </div>
-                            <div>
-                                <Tabspanel/>
+                            <div className="flex flex-wrap h-1/2 bg-transparent">
+                                <Tabspanel items={arts}/>
                             </div>
                         </nav>
                         </div> 
