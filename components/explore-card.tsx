@@ -1,57 +1,60 @@
 import Image from "next/image";
+import {cn} from "@/lib/utils";
+import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
+import {Button} from "@/components/ui/button";
 
 export interface ExploreCardProps {
-  author: string;
-  authorImg: string;
-  image: string;
-  title: string;
-  stock: string;
-  price: string;
+    className?: string;
+    author: string;
+    authorImg: string;
+    image: string;
+    title: string;
+    stock: string;
+    price: string;
 }
 
 export default function ExploreCard({
-  author,
-  authorImg,
-  image,
-  title,
-  stock,
-  price,
-}: ExploreCardProps) {
-  return (
-    <div className="relative">
-      <div className="bg-white rounded-xl p-6 border-0">
-        <div className="items-center justify-start flex-row flex ">
-          <div className="h-8 w-8">
-            <Image
-              src={image} alt={title} width={400} height={300}
-            />
-          </div>
-          <h6 className="mb-0 ms-2 fw-semibold text-muted f-14">{author}</h6>
-        </div>
-        <div className="card-image mt-3">
-          <Image src={image} alt={title} width={400} height={300} />
-        </div>
-        <div className="body-content mt-3">
-          <h6 className="fw-bold">{title}</h6>
-          <div className="d-flex">
-            <p className="text-muted">{stock} in stock</p>
-            <p className="ms-auto text-muted">
-              Price : <span className="text-success">{price} ETH</span>
-            </p>
-          </div>
-          <hr />
-          <div className="d-flex mt-3 align-items-center">
-            <div className="history">
-              <i className="mdi mdi-restart f-20 align-middle"></i>View History
+                                        className,
+                                        author,
+                                        authorImg,
+                                        image,
+                                        title,
+                                        stock,
+                                        price,
+                                    }: ExploreCardProps) {
+    return (
+        <div
+            className={
+                cn("bg-white flex flex-col break-words p-[20px] rounded-lg shadow-lg",
+                    className)
+            }
+        >
+            <div className="mb-2 flex items-center">
+                <Avatar>
+                    <AvatarImage src={authorImg} alt={author}/>
+                    <AvatarFallback>CN</AvatarFallback>
+                </Avatar>
+                <h6 className="ml-2 font-bold text-[14px]">{author}</h6>
             </div>
-            <div className="bid-button ms-auto">
-              <button className="btn btn-sm btn-primary rounded-pill">
-                Bid
-              </button>
+
+            <div className="w-auto h-80 overflow-hidden relative rounded-2xl mb-2">
+                <Image src={image} alt={title} fill={true} style={{objectFit: "cover"}}/>
             </div>
-          </div>
+
+            <div>
+                <h6 className="font-bold text-lg">{title}</h6>
+                <div className="flex justify-between my-2">
+                    <p className="font-medium text-[#6b6e6f] text-sm">{stock} in stock</p>
+                    <p className="font-medium text-green-700 text-sm">{price} ETH</p>
+                </div>
+            </div>
+
+            <hr className="my-2"/>
+
+            <Button variant="destructive">
+                View
+            </Button>
+
         </div>
-      </div>
-    </div>
-  );
+    );
 }

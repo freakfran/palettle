@@ -1,55 +1,63 @@
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import ExploreCard, { ExploreCardProps } from "./explore-card";
-import { CarouselItem } from "@/components/ui/carousel";
+'use client'
+import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/components/ui/tabs";
+import ExploreCard, {ExploreCardProps} from "./explore-card";
+import {useState} from "react";
 
 interface TabsPanelProps {
-  items: ExploreCardProps[];
+    tags: string[];
 }
 
-export default function TabsPanel({ items }: TabsPanelProps) {
-  return (
-    <Tabs defaultValue="ALL" className="w-[400px]">
-      <TabsList>
-        <TabsTrigger className="" value="ALL">
-          ALL
-        </TabsTrigger>
-        <TabsTrigger value="GAMES">GAMES</TabsTrigger>
-        <TabsTrigger value="ART">ART</TabsTrigger>
-        <TabsTrigger value="MEMES">MEMES</TabsTrigger>
-        <TabsTrigger value="COLLECTION">COLLECTION</TabsTrigger>
-      </TabsList>
-      <TabsContent value="ALL">
-        {items.map((ex) => (
-          <ExploreCard
-            key={ex.title}
-            author={ex.author}
-            authorImg={ex.authorImg}
-            image={ex.image}
-            title={ex.title}
-            stock={ex.stock}
-            price={ex.price}
-          />
-        ))}
-      </TabsContent>
-      <TabsContent value="GAMES">
-        {items.map((ex) => (
-          <ExploreCard
-            key={ex.title}
-            author={ex.author}
-            authorImg={ex.authorImg}
-            image={ex.image}
-            title={ex.title}
-            stock={ex.stock}
-            price={ex.price}
-          />
-        ))}
-      </TabsContent>
-      <TabsContent value="ART">Make changes to your account here.</TabsContent>
-      <TabsContent value="MEMES">Change your password here.</TabsContent>
-      <TabsContent value="account">
-        Make changes to your account here.
-      </TabsContent>
-      <TabsContent value="COLLECTION">Change your password here.</TabsContent>
-    </Tabs>
-  );
+function getArtworks(tag: string) {
+    const seed = tag.length;
+
+    const artworks: ExploreCardProps[] = [];
+    for (let i = 0; i < 8; i++) {
+        artworks.push({
+            author: "test",
+            authorImg: `https://picsum.photos/id/${seed + i}/200/300`,
+            image: `https://picsum.photos/id/${seed + i + 1}/200/300`,
+            price: "0.08",
+            stock: "3",
+            title: "Cool art",
+        })
+    }
+
+    return artworks;
+}
+
+export default function TabsPanel({tags}: TabsPanelProps) {
+    const [selected, setSelected] = useState('ALL');
+
+    const answer = getArtworks(selected);
+    return (
+        <Tabs defaultValue="ALL"
+              className="ml-auto mr-auto w-full"
+              onValueChange={(value) => setSelected(value)}>
+            <TabsList className="w-full h-auto">
+                <TabsTrigger key="ALL" className="text-3xl" value="ALL">
+                    ALL
+                </TabsTrigger>
+                {tags.map(tag => (
+                    <TabsTrigger key={tag} className="text-3xl ml-8" value={tag}>
+                        {tag}
+                    </TabsTrigger>
+                ))}
+            </TabsList>
+
+            <TabsContent className="columns-4" value={selected}>
+                {
+                    answer &&
+                    answer.map((artwork, index) => (
+                        <ExploreCard
+                            className="mb-5"
+                            key={index}
+                            {...artwork}
+                        />
+                    ))
+                }
+            </TabsContent>
+
+
+        </Tabs>
+    );
 }

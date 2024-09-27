@@ -1,14 +1,9 @@
-import {Input} from "@/components/ui/input";
-import {Search} from "lucide-react";
 import SearchBar from "@/components/search-bar";
-import PicCard, {PicCardProps} from "@/components/pic-card";
+import {PicCardProps} from "@/components/pic-card";
 import MoveCarousel from "@/components/move-carousel";
-import CollectionCard, {CollectionCardProps} from "@/components/collection-card";
 import CreatorCarousel from "@/components/creator-carousel";
 import {CreatorProps} from "@/components/creator";
 import Tabspanel from "@/components/tabspanel";
-import { ExploreCardProps } from "@/components/explore-card";
-
 
 
 /**
@@ -94,140 +89,85 @@ function renderTop() {
 }
 
 function renderArtworks() {
-    const arts: ExploreCardProps[] = [
-        {
-            author: '_犬野子',
-            authorImg: 'https://p3-pc.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-i-0813c001_okm6WAK6rCArtDIkClebACg1rs5AOTEe9AnKAq.jpeg?from=327834062',
-            image: 'https://cdn.britannica.com/04/95904-050-7EB39FC8/Last-Supper-wall-painting-restoration-Leonardo-da-1999.jpg',
-            title: '芙莉莲',
-            stock: '100',
-            price: '100',
-            
-        },
-        {
-            author: '_犬野子',
-            authorImg: 'https://p3-pc.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-i-0813c001_okm6WAK6rCArtDIkClebACg1rs5AOTEe9AnKAq.jpeg?from=327834062',
-            image: 'https://cdn.britannica.com/04/95904-050-7EB39FC8/Last-Supper-wall-painting-restoration-Leonardo-da-1999.jpg',
-            title: '芙莉莲',
-            stock: '100',
-            price: '100',
-            
-        },        {
-            author: '_犬野子',
-            authorImg: 'https://p3-pc.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-i-0813c001_okm6WAK6rCArtDIkClebACg1rs5AOTEe9AnKAq.jpeg?from=327834062',
-            image: 'https://cdn.britannica.com/04/95904-050-7EB39FC8/Last-Supper-wall-painting-restoration-Leonardo-da-1999.jpg',
-            title: '芙莉莲',
-            stock: '100',
-            price: '100',
-            
-        },        {
-            author: '_犬野子',
-            authorImg: 'https://p3-pc.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-i-0813c001_okm6WAK6rCArtDIkClebACg1rs5AOTEe9AnKAq.jpeg?from=327834062',
-            image: 'https://cdn.britannica.com/04/95904-050-7EB39FC8/Last-Supper-wall-painting-restoration-Leonardo-da-1999.jpg',
-            title: '芙莉莲',
-            stock: '100',
-            price: '100',
-            
-        },        {
-            author: '_犬野子',
-            authorImg: 'https://p3-pc.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-i-0813c001_okm6WAK6rCArtDIkClebACg1rs5AOTEe9AnKAq.jpeg?from=327834062',
-            image: 'https://cdn.britannica.com/04/95904-050-7EB39FC8/Last-Supper-wall-painting-restoration-Leonardo-da-1999.jpg',
-            title: '芙莉莲',
-            stock: '100',
-            price: '100',
-            
-        },        {
-            author: '_犬野子',
-            authorImg: 'https://p3-pc.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-i-0813c001_okm6WAK6rCArtDIkClebACg1rs5AOTEe9AnKAq.jpeg?from=327834062',
-            image: 'https://cdn.britannica.com/04/95904-050-7EB39FC8/Last-Supper-wall-painting-restoration-Leonardo-da-1999.jpg',
-            title: '芙莉莲',
-            stock: '100',
-            price: '100',
-            
-        }]
     return (
-        <section className="bg-[#f8f9fc] py-20 relative px-6">
+        <section className="bg-[#f8f9fc] p-[120px] relative flex flex-col items-center">
             <div className="container">
-                <div className="flex justify-between">
-                    <div className="p-0 relative shrink-0 w-full max-w-full	mt-auto">
-                        <nav className="my-12 w-1/2">
-                            <div className="my-4 float-left ">
-                                <h2 className="font-bold text-2xl">Explore</h2>
-                            </div>
-                            <div className="flex flex-wrap h-1/2 bg-transparent">
-                                <Tabspanel items={arts}/>
-                            </div>
-                        </nav>
-                        </div> 
+                <div className="p-0 relative shrink-0 w-full max-w-full	mt-auto">
+                    <div className="flex justify-between mb-5">
+                        <div>
+                            <h2 className="font-bold text-4xl">Explore</h2>
+                        </div>
+                    </div>
+                    <Tabspanel tags={['Abstract', 'Digital', 'Photography', 'Painting']}/>
                 </div>
             </div>
         </section>
-        
+
     )
 }
 
 /**
  * 作品集
  */
-function renderCollections() {
-    const collections: CollectionCardProps[] = [
-        {
-            images: [
-                'https://cdn.britannica.com/24/189624-050-F3C5BAA9/Mona-Lisa-oil-wood-panel-Leonardo-da.jpg',
-                'https://cdn.britannica.com/04/95904-050-7EB39FC8/Last-Supper-wall-painting-restoration-Leonardo-da-1999.jpg'
-            ],
-            title: 'Example01',
-            author: 'Leonardo da Vinci',
-            authorImg: 'https://cdn.britannica.com/06/200006-131-ABB681CF/Leonardo-da-Vinci-Italian-Renaissance-Florence-Engraving-1500.jpg',
-            price: '999',
-        },
-        {
-            images: [
-                'https://cdn.britannica.com/24/189624-050-F3C5BAA9/Mona-Lisa-oil-wood-panel-Leonardo-da.jpg',
-                'https://cdn.britannica.com/04/95904-050-7EB39FC8/Last-Supper-wall-painting-restoration-Leonardo-da-1999.jpg',
-                'https://cdn.britannica.com/24/189624-050-F3C5BAA9/Mona-Lisa-oil-wood-panel-Leonardo-da.jpg',
-            ],
-            title: 'Example02',
-            author: 'Yoneyama Mai',
-            authorImg: 'https://i0.hdslb.com/bfs/article/b699ec61f29846d5b421c83f0a30b94487e871cc.jpg@1256w_1256h_!web-article-pic.avif',
-            price: '888',
-        },
-        {
-            images: [
-                'https://cdn.britannica.com/24/189624-050-F3C5BAA9/Mona-Lisa-oil-wood-panel-Leonardo-da.jpg',
-                'https://cdn.britannica.com/04/95904-050-7EB39FC8/Last-Supper-wall-painting-restoration-Leonardo-da-1999.jpg',
-                'https://cdn.britannica.com/24/189624-050-F3C5BAA9/Mona-Lisa-oil-wood-panel-Leonardo-da.jpg',
-                'https://cdn.britannica.com/04/95904-050-7EB39FC8/Last-Supper-wall-painting-restoration-Leonardo-da-1999.jpg'
-            ],
-            title: 'Example03',
-            author: 'Ask',
-            authorImg: 'https://img.moegirl.org.cn/common/1/10/Ask01.jpg',
-            price: '777',
-        }
-    ]
-    return (
-        <section className="p-[120px]">
-            <div className="container">
-                <div className="flex justify-between">
-                    <div>
-                        <h2 className="font-bold text-4xl">Collections</h2>
-                    </div>
-                    <div
-                        className="rounded-full bg-[#ee574c] text-[12px] text-white font-bold
-                        py-[12px] px-[30px] w-fit cursor-pointer">
-                        View all
-                    </div>
-                </div>
-                <div className="mt-12 flex justify-between">
-                    {collections.map((collection, index) =>
-                        <CollectionCard key={index} {...collection}/>)
-                    }
-                </div>
-
-            </div>
-        </section>
-    )
-}
+// function renderCollections() {
+//     const collections: CollectionCardProps[] = [
+//         {
+//             images: [
+//                 'https://cdn.britannica.com/24/189624-050-F3C5BAA9/Mona-Lisa-oil-wood-panel-Leonardo-da.jpg',
+//                 'https://cdn.britannica.com/04/95904-050-7EB39FC8/Last-Supper-wall-painting-restoration-Leonardo-da-1999.jpg'
+//             ],
+//             title: 'Example01',
+//             author: 'Leonardo da Vinci',
+//             authorImg: 'https://cdn.britannica.com/06/200006-131-ABB681CF/Leonardo-da-Vinci-Italian-Renaissance-Florence-Engraving-1500.jpg',
+//             price: '999',
+//         },
+//         {
+//             images: [
+//                 'https://cdn.britannica.com/24/189624-050-F3C5BAA9/Mona-Lisa-oil-wood-panel-Leonardo-da.jpg',
+//                 'https://cdn.britannica.com/04/95904-050-7EB39FC8/Last-Supper-wall-painting-restoration-Leonardo-da-1999.jpg',
+//                 'https://cdn.britannica.com/24/189624-050-F3C5BAA9/Mona-Lisa-oil-wood-panel-Leonardo-da.jpg',
+//             ],
+//             title: 'Example02',
+//             author: 'Yoneyama Mai',
+//             authorImg: 'https://i0.hdslb.com/bfs/article/b699ec61f29846d5b421c83f0a30b94487e871cc.jpg@1256w_1256h_!web-article-pic.avif',
+//             price: '888',
+//         },
+//         {
+//             images: [
+//                 'https://cdn.britannica.com/24/189624-050-F3C5BAA9/Mona-Lisa-oil-wood-panel-Leonardo-da.jpg',
+//                 'https://cdn.britannica.com/04/95904-050-7EB39FC8/Last-Supper-wall-painting-restoration-Leonardo-da-1999.jpg',
+//                 'https://cdn.britannica.com/24/189624-050-F3C5BAA9/Mona-Lisa-oil-wood-panel-Leonardo-da.jpg',
+//                 'https://cdn.britannica.com/04/95904-050-7EB39FC8/Last-Supper-wall-painting-restoration-Leonardo-da-1999.jpg'
+//             ],
+//             title: 'Example03',
+//             author: 'Ask',
+//             authorImg: 'https://img.moegirl.org.cn/common/1/10/Ask01.jpg',
+//             price: '777',
+//         }
+//     ]
+//     return (
+//         <section className="p-[120px]">
+//             <div className="container">
+//                 <div className="flex justify-between">
+//                     <div>
+//                         <h2 className="font-bold text-4xl">Collections</h2>
+//                     </div>
+//                     <div
+//                         className="rounded-full bg-[#ee574c] text-[12px] text-white font-bold
+//                         py-[12px] px-[30px] w-fit cursor-pointer">
+//                         View all
+//                     </div>
+//                 </div>
+//                 <div className="mt-12 flex justify-between">
+//                     {collections.map((collection, index) =>
+//                         <CollectionCard key={index} {...collection}/>)
+//                     }
+//                 </div>
+//
+//             </div>
+//         </section>
+//     )
+// }
 
 /**
  * 作者
@@ -288,7 +228,7 @@ function renderCreators() {
 
 
     return (
-        <section className="p-[120px] bg-[#f8f9fc]">
+        <section className="p-[120px] flex flex-col items-center">
             <div className="container">
                 <div className="flex justify-between">
                     <div>
@@ -305,14 +245,14 @@ function renderCreators() {
 export default function Home() {
     const Top = renderTop();
     const Artworks = renderArtworks();
-    const Collections = renderCollections();
+    // const Collections = renderCollections();
     const Creators = renderCreators();
 
     return (
         <>
             {Top}
             {Artworks}
-            {Collections}
+            {/*{Collections}*/}
             {Creators}
         </>
 

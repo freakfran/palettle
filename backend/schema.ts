@@ -5,8 +5,8 @@ export const users = pgTable("user", {
     address: text("address")
         .primaryKey(),
     nickname: text("nickname"),
-    avatar: text("avatar"),
-    profileImg: text("profile_img"),
-    indexImg: text("index_img"),
+    avatarId: text("avatar_id"),
+    profileId: text("profile_id"),
+    indexId: text("index_id"),
     xAccount: text("x_account"),
 })

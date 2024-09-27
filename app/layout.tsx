@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 
 function Footer() {
     return (
-        <footer className="p-[120px]">
+        <footer className="p-[120px] bg-[#f8f9fc]">
             <div className="flex justify-around">
                 <div>
                     <div className="flex">
