@@ -1,6 +1,7 @@
 import {db} from "@/backend";
 import {eq} from "drizzle-orm";
 import {users} from "@/backend/schema";
+import * as env from "@/utils/env"
 
 
 /**
@@ -18,9 +19,9 @@ export async function getUserByAddress(address: string) {
         await db.insert(users).values({
             address,
             nickname: address,
-            avatarId: "1",
-            profileId: "2",
-            indexId: "3",
+            avatarId: env.DEFAULT_AVATAR_ID,
+            profileId: env.DEFAULT_PROFILE_ID,
+            indexId: env.DEFAULT_INDEX_ID,
         });
 
         existingUser = await db.query.users.findFirst(
