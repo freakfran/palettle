@@ -1,20 +1,20 @@
 'use client'
 import {getDefaultConfig, RainbowKitProvider} from "@rainbow-me/rainbowkit";
-import {mainnet, sepolia} from "viem/chains";
+import {lineaSepolia} from "viem/chains";
 import {http} from "viem";
 import {QueryClient} from "@tanstack/query-core";
 import React from "react";
 import {WagmiProvider} from "wagmi";
 import {QueryClientProvider} from "@tanstack/react-query";
+import * as env from "@/utils/env"
 
 
 const config = getDefaultConfig({
     appName: 'pattle',
-    projectId: `${process.env.WALLETCONNECT_PROJECT_ID}`,
-    chains: [sepolia, mainnet],
+    projectId: env.WALLETCONNECT_PROJECT_ID,
+    chains: [lineaSepolia],
     transports: {
-        [mainnet.id]: http(`${process.env.MAINNET_API_URL}`),
-        [sepolia.id]: http(`${process.env.SEPOLIA_API_URL}`),
+        [lineaSepolia.id]: http(env.LINEA_SEPOLIA_API_URL),
     },
     ssr: true,
 });
