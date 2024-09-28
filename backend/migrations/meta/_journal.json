@@ -8,6 +8,13 @@
       "when": 1727265001646,
       "tag": "0000_abnormal_patch",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1727515085866,
+      "tag": "0001_groovy_loa",
+      "breakpoints": true
     }
   ]
 }

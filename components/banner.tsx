@@ -1,3 +1,4 @@
+'use client'
 import {
     NavigationMenu,
     NavigationMenuItem,
@@ -8,8 +9,11 @@ import {
 import Link from "next/link";
 import {ConnectButton} from "@rainbow-me/rainbowkit";
 import Image from "next/image";
+import {useAccount} from "wagmi";
+import ProfileButton from "@/components/profile-button";
 
 export default function Banner() {
+    const {isConnected, address} = useAccount()
     return (
         <NavigationMenu className="fixed p-2 max-w-full bg-white drop-shadow-sm">
             <NavigationMenuList className="flex w-screen flex-row items-start justify-start">
@@ -50,7 +54,9 @@ export default function Banner() {
                 </div>
 
                 <NavigationMenuItem className="flex-1 flex justify-end pr-20">
-                   <ConnectButton/>
+                    {isConnected ?
+                        (<ProfileButton address={address!}/>) : <ConnectButton/>
+                    }
                 </NavigationMenuItem>
             </NavigationMenuList>
         </NavigationMenu>
