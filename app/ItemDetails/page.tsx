@@ -190,12 +190,20 @@ function Title() {
 }
 
 
+function sdfsd () {
+    return (
+        <div className="selected-menu mt-3">
+            <DetailSelect/>
+        </div>
+    )
+}
+
 export default function Home() {
-  const title = Title();
+  const seee = sdfsd();
   
   return (
     <>
-    {title}
+        {seee}
     </>
   )
 }
