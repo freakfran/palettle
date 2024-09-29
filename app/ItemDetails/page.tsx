@@ -1,5 +1,4 @@
 import Image from "next/image";
-import CountDown from 'ant-design-pro/lib/CountDown';
 
 function Title() {
     return (
