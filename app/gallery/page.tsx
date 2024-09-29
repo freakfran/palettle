@@ -3,12 +3,13 @@ import {Separator} from "@/components/ui/separator";
 import UploadPicDialog from "@/components/upload-pic-dialog";
 import {useAccount, useReadContract} from "wagmi";
 import {useInfiniteScroll} from "ahooks";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import {getArtworksByAuthor} from "@/backend/actions/token";
 import {Button} from "@/components/ui/button";
 import Image from "next/image";
 import {Artwork} from "@/types";
 import {paletteContractConfig} from "@/utils/pattle";
+import {err} from "pino-std-serializers";
 
 
 export default function GalleryPage() {
@@ -28,17 +29,25 @@ export default function GalleryPage() {
         }
     );
 
-    //todo 更新一个合约方法通过artworkids获取所有tokenid数量
-    const {data: tokenIds} = useReadContract(
+    const [artworkIds, setArtworkIds] = useState<bigint[]>([]);
+
+    useEffect(() => {
+        if (data && data.list && data.list.length > 0) {
+            setArtworkIds(data.list.map(item => BigInt(item.artworkId ? item.artworkId : 0)))
+        }
+    }, [data]);
+
+    const {data: tokenLengths} = useReadContract(
         {
             ...paletteContractConfig,
-            functionName: 'getArtworkTokenIds',
-            args: [data?.list[0].artworkId],
+            functionName: 'getArtworksTokenIdLength',
+            args: [artworkIds],
             query: {
-                enabled: !!data?.list[0].artworkId
+                enabled: artworkIds.length > 0
             }
         }
     )
+
 
 
     useEffect(() => {
@@ -85,7 +94,7 @@ export default function GalleryPage() {
                                                 {artwork.tag}
                                             </div>
                                         </div>
-                                        <p className="text-gray-500 float-left">{tokenIds ? tokenIds.length : 0} minted</p>
+                                        <p className="text-gray-500 float-left">{tokenLengths ? tokenLengths[index].toString() : 0} minted</p>
                                         <Button className="bg-sky-400 hover:bg-sky-500 float-right ml-2">
                                             View
                                         </Button>
