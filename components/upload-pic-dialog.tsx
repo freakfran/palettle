@@ -27,7 +27,7 @@ const uploadArtSchema = z.object({
 
 
 export default function UploadPicDialog() {
-    const {address} = useAccount()
+    const {address, isConnected} = useAccount()
     const [img, setImg] = useState('')
     const router = useRouter();
 
@@ -76,99 +76,101 @@ export default function UploadPicDialog() {
 
 
     return (
-        <Dialog>
-            <DialogTrigger asChild>
-                <Button className="bg-sky-400 hover:bg-sky-500">Upload</Button>
-            </DialogTrigger>
+        !isConnected ?
+            <></> :
+            <Dialog>
+                <DialogTrigger asChild>
+                    <Button className="bg-sky-400 hover:bg-sky-500">Upload</Button>
+                </DialogTrigger>
 
-            <DialogContent className="sm:min-w-[425px] max-w-screen-sm">
-                <DialogHeader>
-                    <DialogTitle>Upload your artwork</DialogTitle>
-                </DialogHeader>
+                <DialogContent className="sm:min-w-[425px] max-w-screen-sm">
+                    <DialogHeader>
+                        <DialogTitle>Upload your artwork</DialogTitle>
+                    </DialogHeader>
 
-                {
-                    img &&
-                    <div className="w-full">
-                        <Image
-                            src={img}
-                            width={0}
-                            height={0}
-                            sizes="100vw"
-                            alt="img"
-                            className="w-full h-auto max-h-[350px] object-contain"
-                        />
-                    </div>
-                }
+                    {
+                        img &&
+                        <div className="w-full">
+                            <Image
+                                src={img}
+                                width={0}
+                                height={0}
+                                sizes="100vw"
+                                alt="img"
+                                className="w-full h-auto max-h-[350px] object-contain"
+                            />
+                        </div>
+                    }
 
 
-                <Form {...form}>
-                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                        <FormField
-                            control={form.control}
-                            name="file"
-                            render={() => (
-                                <FormItem>
-                                    <FormLabel className="font-bold">Image</FormLabel>
-                                    <FormControl>
-                                        <Input type="file" {...fileRef} onChange={handleImgChange}/>
-                                    </FormControl>
-                                    <FormDescription>
-                                        JPEG / JPG / PNG
-                                    </FormDescription>
-                                    <FormMessage/>
-                                </FormItem>
-                            )}
-                        />
+                    <Form {...form}>
+                        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+                            <FormField
+                                control={form.control}
+                                name="file"
+                                render={() => (
+                                    <FormItem>
+                                        <FormLabel className="font-bold">Image</FormLabel>
+                                        <FormControl>
+                                            <Input type="file" {...fileRef} onChange={handleImgChange}/>
+                                        </FormControl>
+                                        <FormDescription>
+                                            JPEG / JPG / PNG
+                                        </FormDescription>
+                                        <FormMessage/>
+                                    </FormItem>
+                                )}
+                            />
 
-                        <FormField
-                            control={form.control}
-                            name="title"
-                            render={({field}) => (
-                                <FormItem>
-                                    <FormLabel className="font-bold">Title</FormLabel>
-                                    <FormControl>
-                                        <Input {...field} />
-                                    </FormControl>
-                                    <FormMessage/>
-                                </FormItem>
-                            )}
-                        />
+                            <FormField
+                                control={form.control}
+                                name="title"
+                                render={({field}) => (
+                                    <FormItem>
+                                        <FormLabel className="font-bold">Title</FormLabel>
+                                        <FormControl>
+                                            <Input {...field} />
+                                        </FormControl>
+                                        <FormMessage/>
+                                    </FormItem>
+                                )}
+                            />
 
-                        <FormField
-                            control={form.control}
-                            name="tag"
-                            render={({field}) => (
-                                <FormItem className="font-bold">
-                                    <FormLabel>Tag</FormLabel>
-                                    <FormControl>
-                                        <Input {...field}/>
-                                    </FormControl>
-                                    <FormMessage/>
-                                </FormItem>
-                            )}
-                        />
+                            <FormField
+                                control={form.control}
+                                name="tag"
+                                render={({field}) => (
+                                    <FormItem className="font-bold">
+                                        <FormLabel>Tag</FormLabel>
+                                        <FormControl>
+                                            <Input {...field}/>
+                                        </FormControl>
+                                        <FormMessage/>
+                                    </FormItem>
+                                )}
+                            />
 
-                        <FormField
-                            control={form.control}
-                            name="description"
-                            render={({field}) => (
-                                <FormItem>
-                                    <FormLabel className="font-bold">Description</FormLabel>
-                                    <FormControl>
-                                        <Textarea className="resize-none" {...field} />
-                                    </FormControl>
-                                    <FormMessage/>
-                                </FormItem>
-                            )}
-                        />
-                        <DialogFooter>
-                            <Button disabled={loading} type="submit">Save</Button>
-                            {error && <p className="text-red-500">{error.message}</p>}
-                        </DialogFooter>
+                            <FormField
+                                control={form.control}
+                                name="description"
+                                render={({field}) => (
+                                    <FormItem>
+                                        <FormLabel className="font-bold">Description</FormLabel>
+                                        <FormControl>
+                                            <Textarea className="resize-none" {...field} />
+                                        </FormControl>
+                                        <FormMessage/>
+                                    </FormItem>
+                                )}
+                            />
+                            <DialogFooter>
+                                <Button disabled={loading} type="submit">Save</Button>
+                                {error && <p className="text-red-500">{error.message}</p>}
+                            </DialogFooter>
 
-                    </form>
-                </Form>
-            </DialogContent>
-        </Dialog>
+                        </form>
+                    </Form>
+                </DialogContent>
+            </Dialog>
     )
 }
