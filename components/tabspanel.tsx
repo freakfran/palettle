@@ -24,7 +24,7 @@ function getArtworks(tag: string) {
 
     return artworks;
 }
-
+ 
 export default function TabsPanel({tags}: TabsPanelProps) {
     const [selected, setSelected] = useState('ALL');
 

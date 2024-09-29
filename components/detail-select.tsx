@@ -4,7 +4,6 @@ import {
     SelectItem,
     SelectTrigger,
     SelectValue,
-    SelectLabel
   } from "@/components/ui/select"
 
   
@@ -12,6 +11,7 @@ export default function DetailSelect (){
     return (
     <Select>
       <SelectTrigger className="w-[180px]">
+      <SelectValue placeholder = "" />
       </SelectTrigger>
       <SelectContent>
         <SelectItem value="Wallet">Set up Your Wallet</SelectItem>
