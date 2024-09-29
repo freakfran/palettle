@@ -1,18 +1,21 @@
-import Image from "next/image";
+
 import DetailCard, {DetailCardProps} from "@/components/detail-card";
-interface Props {
-    card: DetailCardProps;
- }
+interface Title {
+    items: DetailCardProps[]
+}
+
 function Title() {
-    const card : DetailCardProps[] = [{
-            title : 'Create And Sell Your NFTs',
-            stock : '99',
-            price : '99',
-            image : 'https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oEVmECroFzAwUFAvAKfAA9lADAlgoC9fIlt45h~tplv-dy-aweme-images:q75.webp?biz_tag=aweme_images&from=327834062&s=PackSourceEnum_AWEME_DETAIL&sc=image&se=false&x-expires=1729767600&x-signature=9jlJn1UqJf2hvEmbSIfOxIkk84w%3D',
-            author : '_犬野子',
-            authorImg : 'https://p3-pc.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-i-0813c001_okm6WAK6rCArtDIkClebACg1rs5AOTEe9AnKAq.jpeg?from=327834062',
-            seller : '芙莉莲',
-    }]
+    const art : DetailCardProps = 
+    {
+            title: 'Create And Sell Your NFTs',
+            stock: '99',
+            price: '99',
+            image: 'https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oEVmECroFzAwUFAvAKfAA9lADAlgoC9fIlt45h~tplv-dy-aweme-images:q75.webp?biz_tag=aweme_images&from=327834062&s=PackSourceEnum_AWEME_DETAIL&sc=image&se=false&x-expires=1729767600&x-signature=9jlJn1UqJf2hvEmbSIfOxIkk84w%3D',
+            author: '_犬野子',
+            authorImg: 'https://p3-pc.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-i-0813c001_okm6WAK6rCArtDIkClebACg1rs5AOTEe9AnKAq.jpeg?from=327834062',
+            seller: '芙莉莲',
+    }
+
     
     return (
       <section className="item-detail section bg-light">
@@ -48,7 +51,15 @@ function Title() {
                   </div>
               </div>
           </div>
-            <DetailCard Props={card} />
+            <DetailCard key={art.title}
+                        title={art.title}
+                        stock={art.stock}
+                        price={art.price}
+                        image={art.image}
+                        author={art.author}
+                        authorImg={art.authorImg}
+                        seller={art.seller}
+                        />
       </div>
   </section>
   );
