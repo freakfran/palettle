@@ -10,3 +10,14 @@ export const users = pgTable("user", {
     indexId: text("index_id"),
     xAccount: text("x_account"),
 })
+
+export const artworks = pgTable("artwork", {
+    id: text("id")
+        .primaryKey(),
+    artworkId: text("artwork_id"),
+    tag: text("tag"),
+    authorAddress: text("author_address"),
+    title: text("title"),
+    description: text("description"),
+    url: text("url"),
+})

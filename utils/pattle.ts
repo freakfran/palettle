@@ -1,5 +1,5 @@
 export const paletteContractConfig = {
-    "address": '0xC970E01fF91EDf51ED16C615cAD13d4aFA5005a8',
+    "address": '0xF39f79dFf95FB5767C3e1F45b7071F62B28A5F09',
     "abi": [
         {
             "type": "constructor",
@@ -209,6 +209,13 @@ export const paletteContractConfig = {
             }],
             "outputs": [],
             "stateMutability": "nonpayable"
+        },
+        {
+            "type": "function",
+            "name": "getArtworksTokenIdLength",
+            "inputs": [{"name": "_artworkId", "type": "uint256[]", "internalType": "uint256[]"}],
+            "outputs": [{"name": "", "type": "uint256[]", "internalType": "uint256[]"}],
+            "stateMutability": "view"
         },
         {
             "type": "function",
