@@ -13,7 +13,6 @@ import {pinata} from "@/utils/config";
 import {useRequest} from "ahooks";
 import {insertArtwork} from "@/backend/actions/token";
 import {useAccount} from "wagmi";
-import {useRouter} from "next/navigation";
 
 const uploadArtSchema = z.object({
     file: z
@@ -29,7 +28,6 @@ const uploadArtSchema = z.object({
 export default function UploadPicDialog() {
     const {address} = useAccount()
     const [img, setImg] = useState('')
-    const router = useRouter();
 
     const form = useForm<z.infer<typeof uploadArtSchema>>({
         resolver: zodResolver(uploadArtSchema),
@@ -62,7 +60,7 @@ export default function UploadPicDialog() {
     }
     if (ipfsUrl) {
         console.log(ipfsUrl);
-        router.refresh();
+        window.location.reload()
     }
 
 

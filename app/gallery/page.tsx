@@ -94,7 +94,7 @@ export default function GalleryPage() {
                                                 {artwork.tag}
                                             </div>
                                         </div>
-                                        <p className="text-gray-500 float-left">{tokenLengths ? tokenLengths[index].toString() : 0} minted</p>
+                                        <p className="text-gray-500 float-left">{tokenLengths && tokenLengths[index] ? tokenLengths[index].toString() : 0} minted</p>
                                         <Button className="bg-sky-400 hover:bg-sky-500 float-right ml-2">
                                             View
                                         </Button>
@@ -106,9 +106,12 @@ export default function GalleryPage() {
                                 ))}
                             </div>
                             {data?.nextId && (
-                                <Button onClick={loadMore} disabled={loadingMore}>
-                                    {loadingMore ? 'Loading...' : 'Load more'}
-                                </Button>
+                                <div className="text-center mt-3">
+                                    <Button className="ml-auto mr-auto" variant="destructive" onClick={loadMore} disabled={loadingMore}>
+                                        {loadingMore ? 'Loading...' : 'Load more'}
+                                    </Button>
+                                </div>
+
                             )}
                         </div>
 
