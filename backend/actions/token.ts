@@ -22,7 +22,8 @@ export async function insertArtwork(url: string,
         url: url,
         title: title,
         description: description,
-        tag: tag
+        tag: tag,
+        createdAt: new Date()
     });
 
 }
@@ -33,6 +34,7 @@ export async function getArtworksByAuthor(authorAddress: string, pageSize: numbe
         where: eq(artworks.authorAddress, authorAddress),
         offset: startIndex ?? 0,
         limit: pageSize,
+        orderBy: [artworks.artworkId]
     });
 
     const nextId = result.length < pageSize ? undefined : (startIndex ?? 0) + result.length
@@ -43,4 +45,9 @@ export async function getArtworksByAuthor(authorAddress: string, pageSize: numbe
     }
     return response
 
+}
+
+
+export async function updateArtworkId(id: string, artworkId: string) {
+    await db.update(artworks).set({artworkId: artworkId}).where(eq(artworks.id, id))
 }

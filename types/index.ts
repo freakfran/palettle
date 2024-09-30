@@ -19,5 +19,6 @@ export interface Artwork {
     url: string,
     title: string,
     description: string,
-    tag: string
+    tag: string,
+    createdAt: Date
 }

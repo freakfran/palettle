@@ -1,6 +1,7 @@
 import {Artwork} from "@/types";
 import Image from "next/image";
 import {Button} from "@/components/ui/button";
+import MintDialog from "@/components/mint-dialog";
 
 interface GalleryArtworkCardProps {
     artwork: Artwork
@@ -32,9 +33,7 @@ export default function GalleryArtworkCard({artwork, tokenLength}: GalleryArtwor
             <Button className="bg-sky-400 hover:bg-sky-500 float-right ml-2">
                 View
             </Button>
-            <Button variant="destructive" className="float-right">
-                Mint
-            </Button>
+            <MintDialog artwork={artwork} className="float-right"/>
 
         </div>
     )

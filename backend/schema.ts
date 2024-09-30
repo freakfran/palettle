@@ -1,4 +1,4 @@
-import {pgTable} from "drizzle-orm/pg-core";
+import {pgTable, timestamp} from "drizzle-orm/pg-core";
 import {text} from "drizzle-orm/pg-core/columns/text";
 
 export const users = pgTable("user", {
@@ -20,4 +20,5 @@ export const artworks = pgTable("artwork", {
     title: text("title"),
     description: text("description"),
     url: text("url"),
+    createdAt: timestamp("created_at").defaultNow(),
 })

@@ -1,5 +1,5 @@
 export const paletteContractConfig = {
-    "address": '0xF39f79dFf95FB5767C3e1F45b7071F62B28A5F09',
+    "address": '0xc0CeF20159999542Beb41F9d5b01B2Ce7C22F0D7',
     "abi": [
         {
             "type": "constructor",
@@ -9,11 +9,16 @@ export const paletteContractConfig = {
         {
             "type": "function",
             "name": "addNftToArtwork",
-            "inputs": [{"name": "_artworkId", "type": "uint256", "internalType": "uint256"}, {
-                "name": "_amount",
-                "type": "uint256",
-                "internalType": "uint256"
-            }],
+            "inputs": [
+                {
+                    "name": "_artworkId",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                }, {
+                    "name": "_amount",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                }],
             "outputs": [],
             "stateMutability": "nonpayable"
         },

@@ -29,6 +29,13 @@
       "when": 1727596452284,
       "tag": "0003_loving_sasquatch",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1727677942114,
+      "tag": "0004_military_reavers",
+      "breakpoints": true
     }
   ]
 }

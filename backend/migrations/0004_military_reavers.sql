@@ -1,0 +1,1 @@
+ALTER TABLE "artwork" ADD COLUMN "created_at" timestamp DEFAULT now();

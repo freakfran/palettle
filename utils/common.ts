@@ -5,3 +5,8 @@ export function compressString(str: string, maxLength: number) {
         return str
     }
 }
+
+
+export function formatDate(date: Date) {
+    return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
+}
