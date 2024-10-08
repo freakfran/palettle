@@ -1,4 +1,5 @@
 
+import Breadcrumb from "@/components/bread-crumb";
 import DetailCard, {DetailCardProps} from "@/components/detail-card";
 interface Title {
     items: DetailCardProps[]
@@ -10,7 +11,7 @@ function Title() {
             title: 'Create And Sell Your NFTs',
             stock: '99',
             price: '99',
-            image: 'https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oEVmECroFzAwUFAvAKfAA9lADAlgoC9fIlt45h~tplv-dy-aweme-images:q75.webp?biz_tag=aweme_images&from=327834062&s=PackSourceEnum_AWEME_DETAIL&sc=image&se=false&x-expires=1729767600&x-signature=9jlJn1UqJf2hvEmbSIfOxIkk84w%3D',
+            image: 'https://i0.hdslb.com/bfs/new_dyn/a43a2be254e0c64de608de3cbfbc1e5f379292351.jpg@1052w_!web-dynamic.avif',
             author: '_犬野子',
             authorImg: 'https://p3-pc.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-i-0813c001_okm6WAK6rCArtDIkClebACg1rs5AOTEe9AnKAq.jpeg?from=327834062',
             seller: '芙莉莲',
@@ -18,21 +19,14 @@ function Title() {
 
     
     return (
-      <section className="item-detail section bg-light">
-      <div className="container">
-          <div className="row mt-4">
-              <div className="col-lg-12">
-                  <nav aria-label="breadcrumb">
-                      <ol className="breadcrumb default mb-0">
-                          <li className="breadcrumb-item">
-                              <a href="index1.html" className="text-muted">Home</a>
-                          </li>
-                          <li className="breadcrumb-item active text-primary" aria-current="page">Items Details</li>
-                      </ol>
-                  </nav>
-              </div>
+      <section className="overflow-hidden relative min-h-[100vh]
+                flex items-center bg-white pt-[40px]
+                bg-center
+                bg-no-repeat">
+      <div className="container m-14">
+          <div className="">
+            <Breadcrumb />
           </div>
-
           <div className="row align-items-center justify-content-center">
               <div className="col-lg-8">
                   <div className="inner-heading text-center">

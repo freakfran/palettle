@@ -23,7 +23,7 @@ export default function DetailCard({
     <div className="row mt-5 align-items-center">
       <div className="col-lg-6">
         <div className="back-home-image pe-4">
-          <Image src={image} alt={title} />
+          <Image src={image} alt={title} width={400} height={400}/>
         </div>
       </div>
       <div className="col-lg-6">
@@ -108,9 +108,9 @@ export default function DetailCard({
                   <div className="flex-shrink-0">
                     <div className="avatar-md">
                       <Image
-                        src={image}
+                        src={authorImg}
                         alt={title}
-                        className="img-fluid rounded-circle"
+                        width={40} height={40}
                       />
                     </div>
                   </div>
@@ -128,9 +128,9 @@ export default function DetailCard({
                   <div className="flex-shrink-0">
                     <div className="avatar-md">
                       <Image
-                        src={image}
+                        src={authorImg}
                         alt={title}
-                        className="img-fluid rounded-circle"
+                        width={40} height={40}
                       />
                     </div>
                   </div>
@@ -155,7 +155,7 @@ export default function DetailCard({
                     <Image
                       src={image}
                       alt={title}
-                      className="img-fluid rounded-circle"
+                      width={10} height={10}
                     />
                   </div>
                 </div>
@@ -171,7 +171,7 @@ export default function DetailCard({
                     <Image
                       src={image}
                       alt={title}
-                      className="img-fluid rounded-circle"
+                      width={10} height={10}
                     />
                   </div>
                 </div>
