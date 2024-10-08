@@ -20,13 +20,13 @@ export default function DetailCard({
   seller,
 }: DetailCardProps) {
   return (
-    <div className="row mt-5 align-items-center">
-      <div className="col-lg-6">
+    <div className="flex flex-row mt-5 align-items-center">
+      <div className="relative w-2/4 justify-start">
         <div className="back-home-image pe-4">
-          <Image src={image} alt={title} width={400} height={400}/>
+          <Image src={image} alt={title} width={800} height={400}/>
         </div>
       </div>
-      <div className="col-lg-6">
+      <div className="flex justify-end">
         <div className="backhome-content mt-4 mt-lg-0">
           <h2 className="fw-bold">Create And Sell Your NFTs</h2>
           <div className="d-flex mt-3 align-items-center">

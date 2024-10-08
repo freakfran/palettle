@@ -90,14 +90,9 @@ function renderTop() {
 
 function renderArtworks() {
     return (
-        <section className="bg-[#f8f9fc] p-[120px] relative flex flex-col items-center">
+        <section className="bg-[#f8f9fc] p-[90px] relative flex flex-col items-center">
             <div className="container">
-                <div className="p-0 relative shrink-0 w-full max-w-full	mt-auto">
-                    <div className="flex justify-between mb-5">
-                        <div>
-                            <h2 className="font-bold text-4xl">Explore</h2>
-                        </div>
-                    </div>
+                <div className="p-0 relative shrink-0 w-full max-w-full	mt-auto flex flex-wrap box-border">
                     <Tabspanel tags={['Abstract', 'Digital', 'Photography', 'Painting']}/>
                 </div>
             </div>
