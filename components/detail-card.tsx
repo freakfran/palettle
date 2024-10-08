@@ -1,5 +1,7 @@
 import Image from "next/image";
+import ClickableButton from "./clickable-button";
 import DetailSelect from "@/components/detail-select";
+import {DropdownMenuRadioGroupDemo} from "./dropdown-menu";
 export interface DetailCardProps {
   title: string;
   stock: string;
@@ -20,52 +22,26 @@ export default function DetailCard({
   seller,
 }: DetailCardProps) {
   return (
-    <div className="flex flex-row mt-5 align-items-center">
-      <div className="relative w-2/4 justify-start">
-        <div className="back-home-image pe-4">
-          <Image src={image} alt={title} width={800} height={400}/>
+    <div className="flex flex-row mt-5 justify-center mx-auto">
+      <div className="relative w-full">
+        <div className="back-home-image pe-4 ">
+          <Image src={image} alt={title} width={500} height={450}/>
         </div>
       </div>
-      <div className="flex justify-end">
+      <div className="flex ">
         <div className="backhome-content mt-4 mt-lg-0">
-          <h2 className="fw-bold">Create And Sell Your NFTs</h2>
+          <h2 className="text-[#183b56] font-bold text-3xl leading-6 mb-7">Create And Sell Your NFTs</h2>
           <div className="d-flex mt-3 align-items-center">
             <a>
-              <span className="badge rounded-pill bg-white box-shadow text-dark f-16 fw-normal py-2 px-3">
-                <i className="mdi mdi-heart text-danger f-18 me-2 align-middle"></i>
-                2.35K
-              </span>
+              <ClickableButton text="2.35k"/>
             </a>
 
-            <div className="icon d-flex ms-auto">
+            <div className="ml-auto flex box-border	">
               <div className="like">
-                <a>
-                  <i className="mdi mdi-heart"></i>
-                </a>
+              <ClickableButton text="like"/>
               </div>
               <div className="menu ms-3">
-                <div className="dropdown">
-                  <a>
-                    <i className="mdi mdi-dots-vertical"></i>
-                  </a>
-                  <ul className="dropdown-menu">
-                    <li>
-                      <a className="dropdown-item" href="#">
-                        Action
-                      </a>
-                    </li>
-                    <li>
-                      <a className="dropdown-item" href="#">
-                        Another action
-                      </a>
-                    </li>
-                    <li>
-                      <a className="dropdown-item" href="#">
-                        Something else here
-                      </a>
-                    </li>
-                  </ul>
-                </div>
+              <DropdownMenuRadioGroupDemo text="Menu"/>
               </div>
             </div>
           </div>
