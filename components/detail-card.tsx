@@ -38,7 +38,7 @@ export default function DetailCard({
 
             <div className="ml-auto flex box-border	">
               <div className="like">
-              <ClickableButton text="like"/>
+              <ClickableButton text="Like"/>
               </div>
               <div className="menu ms-3">
               <DropdownMenuRadioGroupDemo text="Menu"/>
@@ -50,9 +50,10 @@ export default function DetailCard({
             <DetailSelect />
           </div>
 
-          <div className="tab-box my-4">
-            <ul className="nav nav-pills">
-              <li className="nav-item">
+          <div className="shadow-[0px_3px_10px_0px_rgba(24,59,86,0.08)]
+          p-5 bg-white mt-6 mb-6 rounded-3xl border-boxing">
+            <ul className="nav nav-pills justify-start flex">
+              <li className="">
                 <button className="nav-link active">Details</button>
               </li>
               <li className="nav-item">

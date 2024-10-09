@@ -20,7 +20,7 @@ function Title() {
   return (
     <section
       className="overflow-hidden relative min-h-[100vh]
-                flex items-center bg-white pt-[40px]
+                flex items-center bg-[#f8f9fc] pt-[80px]
                 bg-center
                 bg-no-repeat"
     >

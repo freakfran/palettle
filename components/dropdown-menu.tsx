@@ -32,9 +32,9 @@ export function DropdownMenuRadioGroupDemo({text}:  ButtonMenu) {
       <DropdownMenuContent className="w-56">
         <DropdownMenuSeparator />
         <DropdownMenuRadioGroup value={position} onValueChange={setPosition}>
-          <DropdownMenuRadioItem value="top">Top</DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="bottom">Bottom</DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="right">Right</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="top">Action</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="bottom">Another action</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="right">Something else here</DropdownMenuRadioItem>
         </DropdownMenuRadioGroup>
       </DropdownMenuContent>
     </DropdownMenu>
