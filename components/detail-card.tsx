@@ -31,6 +31,7 @@ export default function DetailCard({
           height={0}
           sizes="300vw"
           style={{ width: "auto", height: "auto" }}
+          className="rounded-3xl"
         />
       </div>
       <div className="mt-4 ms-12 ml-2">
@@ -144,44 +145,46 @@ export default function DetailCard({
         </div>
 
         <div className="flex flex-wrap">
-          <div className="flex flex-wrap">
-            <div className="d-flex align-items-center">
-              <div className="flex-shrink-0">
-                <div className="roundedimage">
-                <Image src={authorImg} alt={title} width={10} height={10} className="rounded-full"/>
+          <div className="pl-10 pr-10 p-3">
+            <div className="flex items-center">
+              <div className="">
+                <div className="">
+                <Image src={authorImg} alt={title} width={25} height={25} className="rounded-full"/>
                 </div>
               </div>
               <div className="flex-grow-1 ms-2">
-                <p className="mb-0 f-14 fw-semibold">@mucky_fennouni..</p>
+                <p className="mb-0 text-[#183b56] text-xs">@mucky_fennouni..</p>
               </div>
             </div>
           </div>
-          <div className="col-lg-6">
-            <div className="d-flex align-items-center">
-              <div className="flex-shrink-0">
-                <div className="avatar-xs border rounded-circle border-3 border-white ">
-                <Image src={authorImg} alt={title} width={10} height={10} className="rounded-full"/>
+          <div className="pl-10 pr-10 p-3">
+            <div className="flex items-center">
+              <div className="">
+                <div className=" ">
+                <Image src={authorImg} alt={title} width={25} height={25} className="rounded-full"/>
                 </div>
               </div>
               <div className="flex-grow-1 ms-2">
-                <p className="mb-0 f-14 fw-semibold">ayoub_fennouni..</p>
+                <p className="mb-0 text-[#183b56] text-xs">ayoub_fennouni..</p>
               </div>
             </div>
           </div>
         </div>
         <hr className="my-4" />
         <div className="row ">
-          <div className="col-lg-6">
-            <h6 className="fw-bold mb-1">Minimum bid</h6>
-            <p className="fw-semibold">
-              4.00036 <span className="text-muted"> ETH / $3268.42</span>
+          <div className="mt-3">
+            <h6 className="fw-bold text-[#183b56] font-bold mb-1 text-sm">Minimum bid</h6>
+            <p className="text-[#183b56] text-sm mt-2">
+              4.00036 <span className="text-[#6b6e6f]"> ETH / $3268.42</span>
             </p>
           </div>
         </div>
 
         <div className="d-flex">
-          <button className="btn btn-primary">Buy Now</button>
-          <button className="btn btn-outline-primary ms-2">Place Bid</button>
+          <button className="shadow-[0_3px_10px_0px_rgba(24,59,86,0.08)] text-[#fff]
+      bg-[#ee574c] pl-7 pr-7 p-3 w-fit rounded-full text-xs m-2 font-sans">BUY NOW</button>
+          <button className="shadow-[0_3px_10px_0px_rgba(24,59,86,0.08)] text-[#ee574c]
+      pl-7 pr-7 p-3 w-fit rounded-full text-xs m-2 font-sans">PlACE BID</button>
         </div>
       </div>
     </div>
