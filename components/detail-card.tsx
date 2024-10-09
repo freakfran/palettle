@@ -1,6 +1,7 @@
 import Image from "next/image";
 import ClickableButton from "./clickable-button";
 import DetailSelect from "@/components/detail-select";
+import DeatailTab from "./detail-tab";
 import { DropdownMenuRadioGroupDemo } from "./dropdown-menu";
 export interface DetailCardProps {
   title: string;
@@ -180,7 +181,7 @@ export default function DetailCard({
           </div>
         </div>
 
-        <div className="d-flex">
+        <div className="flex justify-start mt-4">
           <button className="shadow-[0_3px_10px_0px_rgba(24,59,86,0.08)] text-[#fff]
       bg-[#ee574c] pl-7 pr-7 p-3 w-fit rounded-full text-xs m-2 font-sans">BUY NOW</button>
           <button className="shadow-[0_3px_10px_0px_rgba(24,59,86,0.08)] text-[#ee574c]
