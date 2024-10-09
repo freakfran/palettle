@@ -1,10 +1,10 @@
 import Breadcrumb from "@/components/bread-crumb";
 import DetailCard, { DetailCardProps } from "@/components/detail-card";
-interface Title {
+interface Page {
   items: DetailCardProps[];
 }
 
-function Title() {
+export default function Page() {
   const art: DetailCardProps = {
     title: "Create And Sell Your NFTs",
     stock: "99",
@@ -24,15 +24,14 @@ function Title() {
                 bg-center
                 bg-no-repeat"
     >
-      <div className="container m-14">
-        <div className="">
+      <div className="mx-[370px]">
+        <div className="mt-20">
           <Breadcrumb />
         </div>
-        <div className="flex items-center justify-center flex-wrap mx-auto mt-auto box-border">
-          <div className="relative ">
-            <div className="block text-center ">
+        <div className="m-auto">
+            <div className="text-center ">
               <div className="mt-4">
-                <h1 className="font-bold text-[#183b56] leading-6 mb-7 text-4xl">Item Details</h1>
+                <h1 className="font-bold text-[#183b56] leading-6 mb-7 text-4xl mt-10 font-serif">Item Details</h1>
                 <p className="text-[#6b6e6f] text-sm">
                   {">"}A New Place To Collect And Connect NFT Across The World.
                   It’s come with a creative design, <br /> home page options,
@@ -40,13 +39,12 @@ function Title() {
                 </p>
               </div>
             </div>
-
             <div className="heading-bottom-icon d-flex justify-content-center text-center">
               <i className="mdi mdi-image-filter-vintage"></i>
               <i className="mdi mdi-image-filter-vintage mx-2"></i>
               <i className="mdi mdi-image-filter-vintage"></i>
             </div>
-          </div>
+
         </div>
         <DetailCard
           key={art.title}
@@ -61,10 +59,4 @@ function Title() {
       </div>
     </section>
   );
-}
-
-export default function Home() {
-  const title = Title();
-
-  return <>{title}</>;
 }
