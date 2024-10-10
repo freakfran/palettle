@@ -23,3 +23,16 @@ export async function insertArtwork(
         })
     }
 }
+
+export async function fetchAllTags(){
+    const tag_artworks = await db.query.tag_artworks.findMany();
+    const tags = new Set<string>();
+    if(tag_artworks){
+        for(const tag_artwork of tag_artworks){
+            if(tag_artwork.tag){
+                tags.add(tag_artwork.tag);
+            }
+        }
+    }
+    return Array.from(tags);
+}

@@ -6,10 +6,13 @@ import {paletteContractConfig} from "@/utils/pattle";
 import GalleryContainer from "@/components/gallery-container";
 import {getUserByAddress} from "@/backend/actions/users";
 import {useRequest} from "ahooks";
+import {fetchAllTags} from "@/backend/actions/token";
 
 
 export default function GalleryPage({params}: { params: { exploreAddress: string } }) {
     const {isConnected, address} = useAccount();
+
+    const {data: allTags,loading: loadingTags} = useRequest(fetchAllTags)
 
     const {data: tokenIds} = useReadContract({
         ...paletteContractConfig,
@@ -36,7 +39,7 @@ export default function GalleryPage({params}: { params: { exploreAddress: string
             <div className="shadow-md w-full p-[120px]">
                 <div className="flex justify-between items-center mb-5">
                     <h2 className="font-bold text-4xl">{isMy ? 'Your ' : data?.nickname + '\'s '}Artworks</h2>
-                    {isConnected && <UploadPicDialog/>}
+                    {isConnected && !loadingTags && <UploadPicDialog allTags={allTags!}/>}
                 </div>
                 <Separator/>
                 {tokenIds && <GalleryContainer tokenIds={tokenIds}/>}

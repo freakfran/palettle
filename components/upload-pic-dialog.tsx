@@ -28,13 +28,15 @@ const uploadArtSchema = z.object({
             id: z.string(),
             text: z.string(),
         }),
-    ),
+    ).nonempty({
+        message: "Can't be empty!",
+    }),
     title: z.string(),
     description: z.string()
 })
 
 
-export default function UploadPicDialog() {
+export default function UploadPicDialog({allTags}: { allTags: string[] }) {
     //用户地址
     const {address, isConnected} = useAccount();
     //图片地址
@@ -42,7 +44,8 @@ export default function UploadPicDialog() {
     //标签
     const [tags, setTags] = useState<Tag[]>([]);
     const [activeTagIndex, setActiveTagIndex] = useState<number | null>(null);
-    const [error, setError] = useState<string | null>(null)
+    const [error, setError] = useState<string | null>(null);
+
     //合约相关
     const {
         data: hash,
@@ -86,11 +89,11 @@ export default function UploadPicDialog() {
             description: values.description,
             image: ipfsUrl,
             attribution: {
-                    author: user?.nickname,
-                    authorAddress: address,
-                    createTime: formatDate(new Date()),
-                    tags: tags.join(',')
-                }
+                author: user?.nickname,
+                authorAddress: address,
+                createTime: formatDate(new Date()),
+                tags: tags.join(',')
+            }
 
         }).key(keyDataJson.JWT);
         const ipfsJson = await pinata.gateways.convert(uploadJson.IpfsHash);
@@ -234,7 +237,12 @@ export default function UploadPicDialog() {
                                                 form.setValue('tag', newTags as [Tag, ...Tag[]]);
                                             }}
                                             activeTagIndex={activeTagIndex}
-                                            setActiveTagIndex={setActiveTagIndex}/>
+                                            setActiveTagIndex={setActiveTagIndex}
+                                            maxTags={5}
+                                            showCount={true}
+                                            enableAutocomplete={true}
+                                            autocompleteOptions={allTags.map((tag) => ({text: tag, id: tag}))}
+                                        />
                                     </FormControl>
                                     <FormMessage/>
                                 </FormItem>

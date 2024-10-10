@@ -50,8 +50,8 @@ export default function GalleryArtworkCard({tokenId}: GalleryArtworkCardProps) {
                                             text-center overflow-hidden ml-auto"
                 >
                     {
-                        artwork.attribution.tags &&
-                        artwork.attribution.tags.split(',')[0]
+                        artwork.attribution.tags ?
+                        artwork.attribution.tags.split(',')[0] : 'Empty'
                     }
                 </div>
             </div>
