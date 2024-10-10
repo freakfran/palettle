@@ -5,8 +5,8 @@ import DeatailTab from "./detail-tab";
 import { DropdownMenuRadioGroupDemo } from "./dropdown-menu";
 export interface DetailCardProps {
   title: string;
-  stock: string;
   price: string;
+  like: string;
   image: string;
   author: string;
   authorImg: string;
@@ -15,7 +15,7 @@ export interface DetailCardProps {
 
 export default function DetailCard({
   title,
-  stock,
+  like,
   price,
   image,
   author,
@@ -40,15 +40,15 @@ export default function DetailCard({
           Create And Sell Your NFTs
         </h2>
         <div className="mt-3 flex justify-start">
-          <div>
+          <div className="">
             <ClickableButton
-              text="2.35k"
+              text={like}
               classname="shadow-[0_3px_10px_0px_rgba(24,59,86,0.08)]
-                      bg-[#fff] p-2 w-fit rounded-full text-sm m-2"
+                      bg-[#fff] p-2 w-fit rounded-full text-sm m-2 pl-3 pr-3"
             />
           </div>
           <div className="flex ms-96">
-            <div className="like">
+            <div className="Like">
               <ClickableButton
                 text="Like"
                 classname="shadow-[0_3px_10px_0px_rgba(31,134,239,0.3)]
@@ -65,7 +65,15 @@ export default function DetailCard({
           <DetailSelect />
         </div>
 
-        <DeatailTab />
+        <DeatailTab 
+        key={title}
+        title={title}
+        like={like}
+        price={price}
+        image={image}
+        author={author}
+        authorImg={authorImg}
+        seller={seller}/>
 
         <div className="flex flex-wrap">
           <div className="pl-10 pr-10 p-3">
@@ -76,7 +84,7 @@ export default function DetailCard({
                 </div>
               </div>
               <div className="flex-grow-1 ms-2">
-                <p className="mb-0 text-[#183b56] text-xs">@mucky_fennouni..</p>
+                <p className="mb-0 text-[#183b56] text-xs">{author}</p>
               </div>
             </div>
           </div>
@@ -88,7 +96,7 @@ export default function DetailCard({
                 </div>
               </div>
               <div className="flex-grow-1 ms-2">
-                <p className="mb-0 text-[#183b56] text-xs">ayoub_fennouni..</p>
+                <p className="mb-0 text-[#183b56] text-xs">{author}</p>
               </div>
             </div>
           </div>

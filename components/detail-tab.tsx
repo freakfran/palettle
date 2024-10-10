@@ -2,10 +2,12 @@
 import React, { useState } from "react";
 import { DetailCardProps } from "@/components/detail-card";
 
-export default function DeatailTab() {
+export default function DeatailTab({
+  author,
+}: DetailCardProps) {
   const art: DetailCardProps = {
     title: "Create And Sell Your NFTs",
-    stock: "99",
+    like: "99k",
     price: "99",
     image:
       "https://i0.hdslb.com/bfs/new_dyn/a43a2be254e0c64de608de3cbfbc1e5f379292351.jpg@1052w_!web-dynamic.avif",
@@ -56,7 +58,7 @@ export default function DeatailTab() {
               <span className="text-[#ee574c] font-bold ms-1 text-xs">
                 2 ETH{" "}
               </span>{" "}
-              <span className="text-[#6b6e6f]">@mazanov_sky</span>
+              <span className="text-[#6b6e6f]">{author}</span>
             </p>
             <p className="mb-0 text-[#6b6e6f] text-sm mt-1">
               21/04/2021, 10:05{" "}
@@ -82,7 +84,7 @@ export default function DeatailTab() {
               <span className="text-[#ee574c] font-bold ms-1 text-xs">
                 1 ETH{" "}
               </span>{" "}
-              <span className="text-[#6b6e6f]">@ayoub_fennouni</span>
+              <span className="text-[#6b6e6f]">{author}</span>
             </p>
             <p className="mb-0 text-[#6b6e6f] text-sm mt-1">
               21/04/2021, 10:05{" "}

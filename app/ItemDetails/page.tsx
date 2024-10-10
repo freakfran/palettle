@@ -1,13 +1,11 @@
 import Breadcrumb from "@/components/bread-crumb";
 import DetailCard, { DetailCardProps } from "@/components/detail-card";
-interface Page {
-  items: DetailCardProps[];
-}
+
 
 export default function Page() {
   const art: DetailCardProps = {
     title: "Create And Sell Your NFTs",
-    stock: "99",
+    like: "99k",
     price: "99",
     image:
       "https://i0.hdslb.com/bfs/new_dyn/a43a2be254e0c64de608de3cbfbc1e5f379292351.jpg@1052w_!web-dynamic.avif",
@@ -49,7 +47,7 @@ export default function Page() {
         <DetailCard
           key={art.title}
           title={art.title}
-          stock={art.stock}
+          like={art.like}
           price={art.price}
           image={art.image}
           author={art.author}
