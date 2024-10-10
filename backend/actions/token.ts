@@ -1,8 +1,6 @@
-import {Metadata, PageData} from "@/types";
+import {Metadata} from "@/types";
 import {db} from "@/backend";
-import {artworks} from "@/backend/schema";
-import {uuidv4} from "@walletconnect/utils";
-import {eq} from "drizzle-orm";
+import {artworks, tag_artworks} from "@/backend/schema";
 
 export async function getTokenByUri(uri: string) {
     const response = await fetch(uri!)
@@ -11,43 +9,17 @@ export async function getTokenByUri(uri: string) {
     return metadata;
 }
 
-export async function insertArtwork(url: string,
-                                    title: string,
-                                    author: string,
-                                    description: string,
-                                    tag: string) {
+export async function insertArtwork(
+                                    id: string,
+                                    tags: string[]) {
     await db.insert(artworks).values({
-        id: uuidv4(),
-        authorAddress: author,
-        url: url,
-        title: title,
-        description: description,
-        tag: tag,
+        id: id,
         createdAt: new Date()
     });
-
-}
-
-
-export async function getArtworksByAuthor(authorAddress: string, pageSize: number, startIndex?: number) {
-    const result = await db.query.artworks.findMany({
-        where: eq(artworks.authorAddress, authorAddress),
-        offset: startIndex ?? 0,
-        limit: pageSize,
-        orderBy: [artworks.artworkId]
-    });
-
-    const nextId = result.length < pageSize ? undefined : (startIndex ?? 0) + result.length
-
-    const response: PageData = {
-        list: result,
-        nextId: nextId
+    for (const tag of tags) {
+        await db.insert(tag_artworks).values({
+            artworkId: id,
+            tag: tag
+        })
     }
-    return response
-
-}
-
-
-export async function updateArtworkId(id: string, artworkId: string) {
-    await db.update(artworks).set({artworkId: artworkId}).where(eq(artworks.id, id))
 }

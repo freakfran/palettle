@@ -14,11 +14,15 @@ export const users = pgTable("user", {
 export const artworks = pgTable("artwork", {
     id: text("id")
         .primaryKey(),
-    artworkId: text("artwork_id"),
-    tag: text("tag"),
     authorAddress: text("author_address"),
     title: text("title"),
     description: text("description"),
     url: text("url"),
     createdAt: timestamp("created_at").defaultNow(),
+})
+
+
+export const tag_artworks = pgTable("tag_artwork", {
+    artworkId: text("artwork_id"),
+    tag: text("tag"),
 })

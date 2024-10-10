@@ -9,7 +9,7 @@ import {
     DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
-import {getUserByAddress} from "@/backend/actions/users";
+import {getOrInsertUserByAddress} from "@/backend/actions/users";
 import {useRequest} from "ahooks";
 import {useDisconnect, useReadContract} from "wagmi";
 import {paletteContractConfig} from "@/utils/pattle";
@@ -25,7 +25,7 @@ export default function ProfileButton({address}: ProfileButtonProps) {
 
     // 根据用户地址获取用户
     const {data: user, loading} = useRequest(
-        async () => await getUserByAddress(address),
+        async () => await getOrInsertUserByAddress(address),
         {
             manual: false,
         }

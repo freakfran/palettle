@@ -1,10 +1,13 @@
-
-
 export interface Metadata {
     name: string,
     description: string,
     image: string,
-    attribution: Record<string, unknown>
+    attribution: {
+            author: string,
+            authorAddress: string,
+            createTime: string,
+            tags: string
+        }
 }
 
 export interface PageData {

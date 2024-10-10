@@ -8,7 +8,7 @@ import * as env from "@/utils/env"
  * 查询用户，如果不存在则先插入
  * @param address
  */
-export async function getUserByAddress(address: string) {
+export async function getOrInsertUserByAddress(address: string) {
     let existingUser = await db.query.users.findFirst(
         {
             where: eq(users.address, address)
@@ -32,4 +32,11 @@ export async function getUserByAddress(address: string) {
     }
 
     return existingUser;
+}
+export async function getUserByAddress(address: string) {
+    return db.query.users.findFirst(
+        {
+            where: eq(users.address, address)
+        }
+    );
 }

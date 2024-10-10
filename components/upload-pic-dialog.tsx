@@ -1,7 +1,7 @@
 'use client'
 import {Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger} from "@/components/ui/dialog";
 import {Button} from "@/components/ui/button";
-import {ChangeEvent, useState} from "react";
+import React, {ChangeEvent, useEffect, useState} from "react";
 import {z} from "zod";
 import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
@@ -10,64 +10,151 @@ import {Input} from "@/components/ui/input";
 import {Textarea} from "@/components/ui/textarea";
 import Image from "next/image";
 import {pinata} from "@/utils/config";
+import {useAccount, useWaitForTransactionReceipt, useWriteContract} from "wagmi";
+import {Tag, TagInput} from "emblor";
+import {formatDate} from "@/utils/common";
+import {getUserByAddress} from "@/backend/actions/users";
+import {paletteContractConfig} from "@/utils/pattle";
 import {useRequest} from "ahooks";
 import {insertArtwork} from "@/backend/actions/token";
-import {useAccount} from "wagmi";
 
 const uploadArtSchema = z.object({
     file: z
         .instanceof(FileList)
         .refine((file) => file?.length == 1, 'File is required.')
         .refine((file) => file?.[0].type.startsWith('image/'), 'File must be an image.'),
-    tag: z.string(),
+    tag: z.array(
+        z.object({
+            id: z.string(),
+            text: z.string(),
+        }),
+    ),
     title: z.string(),
     description: z.string()
 })
 
 
 export default function UploadPicDialog() {
-    const {address} = useAccount()
+    //用户地址
+    const {address, isConnected} = useAccount();
+    //图片地址
     const [img, setImg] = useState('')
-
+    //标签
+    const [tags, setTags] = useState<Tag[]>([]);
+    const [activeTagIndex, setActiveTagIndex] = useState<number | null>(null);
+    const [error, setError] = useState<string | null>(null)
+    //合约相关
+    const {
+        data: hash,
+        isPending,
+        error: writeContractError,
+        writeContract
+    } = useWriteContract();
+    const {
+        data: receipt,
+        isLoading: isConfirming,
+    } = useWaitForTransactionReceipt({
+        hash,
+    });
+    //表单事件
     const form = useForm<z.infer<typeof uploadArtSchema>>({
         resolver: zodResolver(uploadArtSchema),
     })
-
     const fileRef = form.register("file");
 
+    //上传metadata到ipfs
     const uploadFile = async (values: z.infer<typeof uploadArtSchema>) => {
+        if (!isConnected || !address) {
+            throw new Error("Please connect your wallet.");
+        }
         const file = values.file[0];
         if (!file) {
             throw new Error("File is required.");
         }
+        const user = await getUserByAddress(address)
+        //先上传图片
         const keyRequest = await fetch("/api/key");
         const keyData = await keyRequest.json();
         const upload = await pinata.upload.file(file).key(keyData.JWT);
         const ipfsUrl = await pinata.gateways.convert(upload.IpfsHash);
-        await insertArtwork(ipfsUrl, values.title, address!, values.description, values.tag);
-        return ipfsUrl;
+        //上传metadata
+        const keyRequestJson = await fetch("/api/key");
+        const keyDataJson = await keyRequestJson.json();
+        const tags = values.tag.map((tag) => (tag.text));
+        const uploadJson = await pinata.upload.json({
+            name: values.title,
+            description: values.description,
+            image: ipfsUrl,
+            attribution: {
+                    author: user?.nickname,
+                    authorAddress: address,
+                    createTime: formatDate(new Date()),
+                    tags: tags.join(',')
+                }
+
+        }).key(keyDataJson.JWT);
+        const ipfsJson = await pinata.gateways.convert(uploadJson.IpfsHash);
+        writeContract({
+            ...paletteContractConfig,
+            functionName: 'mint',
+            args: [address, ipfsJson],
+        })
+        return ipfsJson;
     };
 
+    const saveToDatabase = async (tokenId: string) => {
+        await insertArtwork(tokenId, tags.map((tag) => (tag.text)))
+    }
+
     const {
-        data: ipfsUrl,
-        run,
+        loading: databaseLoading,
+        run: databaseRun,
+        error: databaseError
+    } = useRequest(saveToDatabase, {
+        manual: true,
+    })
+
+    const {
         loading,
-        error
-    } = useRequest(uploadFile, {manual: true})
+        run: upload,
+        error: uploadError,
+    } = useRequest(uploadFile, {
+        manual: true,
+    })
 
-    if (error) {
-        console.log(error)
-    }
-    if (ipfsUrl) {
-        console.log(ipfsUrl);
-        window.location.reload()
-    }
+    useEffect(() => {
+        if (receipt && receipt.logs.length > 0) {
+            const eventEmitted = receipt.logs[0];
+            const tokenId = eventEmitted.topics[3];
+            if (tokenId) {
+                databaseRun(tokenId);
+            } else {
+                setError("did not get tokenId");
+            }
+        }
+    }, [databaseRun, receipt]);
+
+    //错误处理
+    useEffect(() => {
+        if (uploadError) {
+            setError("upload failed:" + uploadError.message);
+        }
+        if (writeContractError) {
+            setError("mint failed:" + writeContractError.message);
+        }
+        if (databaseError) {
+            setError("database error:" + databaseError.message);
+        }
+    }, [writeContractError, uploadError, databaseError]);
 
 
+    //表单提交事件
     function onSubmit(values: z.infer<typeof uploadArtSchema>) {
-        run(values);
+        upload(values);
     }
 
+
+    // 上传图片
     function handleImgChange(e: ChangeEvent<HTMLInputElement>) {
         setImg(URL.createObjectURL(e.target.files![0]));
     }
@@ -139,7 +226,15 @@ export default function UploadPicDialog() {
                                 <FormItem className="font-bold">
                                     <FormLabel>Tag</FormLabel>
                                     <FormControl>
-                                        <Input {...field}/>
+                                        <TagInput
+                                            {...field}
+                                            tags={tags}
+                                            setTags={(newTags) => {
+                                                setTags(newTags);
+                                                form.setValue('tag', newTags as [Tag, ...Tag[]]);
+                                            }}
+                                            activeTagIndex={activeTagIndex}
+                                            setActiveTagIndex={setActiveTagIndex}/>
                                     </FormControl>
                                     <FormMessage/>
                                 </FormItem>
@@ -160,8 +255,9 @@ export default function UploadPicDialog() {
                             )}
                         />
                         <DialogFooter>
-                            <Button disabled={loading} type="submit">Save</Button>
-                            {error && <p className="text-red-500">{error.message}</p>}
+                            <Button disabled={loading || databaseLoading || isPending || isConfirming}
+                                    type="submit">Save</Button>
+                            {error && <p className="text-red-500">{error}</p>}
                         </DialogFooter>
 
                     </form>

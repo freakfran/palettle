@@ -36,6 +36,13 @@
       "when": 1727677942114,
       "tag": "0004_military_reavers",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1728461623758,
+      "tag": "0005_daily_xavin",
+      "breakpoints": true
     }
   ]
 }
