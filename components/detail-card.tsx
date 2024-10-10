@@ -1,7 +1,7 @@
 import Image from "next/image";
 import ClickableButton from "./clickable-button";
 import DetailSelect from "@/components/detail-select";
-import DeatailTab from "./detail-tab";
+import DetailTab from "./detail-tab";
 import { DropdownMenuRadioGroupDemo } from "./dropdown-menu";
 export interface DetailCardProps {
   title: string;
@@ -65,7 +65,7 @@ export default function DetailCard({
           <DetailSelect />
         </div>
 
-        <DeatailTab 
+        <DetailTab 
         key={title}
         title={title}
         like={like}

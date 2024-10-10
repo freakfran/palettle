@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { DetailCardProps } from "@/components/detail-card";
 
-export default function DeatailTab({
+export default function DetailTab({
   author,
 }: DetailCardProps) {
   const art: DetailCardProps = {
