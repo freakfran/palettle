@@ -1,3 +1,4 @@
+"use client"
 import React, { useState } from "react";
 import { DetailCardProps } from "@/components/detail-card";
 
@@ -98,7 +99,8 @@ export default function DeatailTab() {
   };
 
   return (
-    <div>
+    <div className="shadow-[0px_3px_10px_0px_rgba(24,59,86,0.08)]
+    p-5 bg-white mt-6 mb-6 rounded-3xl">
         <ul className="justify-start flex flex-wrap">
           <li className="text-[#183b56] ">
             <button
