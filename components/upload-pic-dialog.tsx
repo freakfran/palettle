@@ -115,6 +115,9 @@ export default function UploadPicDialog({allTags}: { allTags: string[] }) {
         error: databaseError
     } = useRequest(saveToDatabase, {
         manual: true,
+        onSuccess: () => {
+            window.location.reload()
+        }
     })
 
     const {
