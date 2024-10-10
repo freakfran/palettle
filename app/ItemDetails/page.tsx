@@ -37,12 +37,6 @@ export default function Page() {
                 </p>
               </div>
             </div>
-            <div className="heading-bottom-icon d-flex justify-content-center text-center">
-              <i className="mdi mdi-image-filter-vintage"></i>
-              <i className="mdi mdi-image-filter-vintage mx-2"></i>
-              <i className="mdi mdi-image-filter-vintage"></i>
-            </div>
-
         </div>
         <DetailCard
           key={art.title}
