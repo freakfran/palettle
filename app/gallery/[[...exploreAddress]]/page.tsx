@@ -35,7 +35,7 @@ export default function GalleryPage({params}: { params: { exploreAddress: string
         <div className="p-[120px] flex flex-col items-center">
             <div className="shadow-md w-full p-[120px]">
                 <div className="flex justify-between items-center mb-5">
-                    <h2 className="font-bold text-4xl">{isMy ? 'Your ' : data?.nickname + '\'s'}Your Artworks</h2>
+                    <h2 className="font-bold text-4xl">{isMy ? 'Your ' : data?.nickname + '\'s '}Artworks</h2>
                     {isConnected && <UploadPicDialog/>}
                 </div>
                 <Separator/>

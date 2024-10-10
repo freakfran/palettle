@@ -163,7 +163,7 @@ export default function UploadPicDialog() {
     return (
         <Dialog>
             <DialogTrigger asChild>
-                <Button className="bg-sky-400 hover:bg-sky-500">Upload</Button>
+                <Button className="bg-sky-400 hover:bg-sky-500">Mint</Button>
             </DialogTrigger>
 
             <DialogContent className="sm:min-w-[425px] max-w-screen-sm">
