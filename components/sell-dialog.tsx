@@ -108,7 +108,7 @@ export default function SellDialog({tokenId, img, isSellable, price}: SellDialog
                                 <FormItem>
                                     <FormLabel className="font-bold">Price in ETH</FormLabel>
                                     <FormControl>
-                                        <Input {...field} value={price}/>
+                                        <Input {...field} placeholder={price}/>
                                     </FormControl>
                                     <FormMessage/>
                                 </FormItem>

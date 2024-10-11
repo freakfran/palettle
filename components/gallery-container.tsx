@@ -6,10 +6,11 @@ import GalleryArtworkCard from "@/components/gallery-artwork-card";
 import {Button} from "@/components/ui/button";
 
 interface GalleryContainerProps {
-    tokenIds: readonly bigint[]
+    tokenIds: readonly bigint[],
+    isMy: boolean
 }
 
-export default function GalleryContainer({tokenIds}: GalleryContainerProps) {
+export default function GalleryContainer({tokenIds,isMy}: GalleryContainerProps) {
     async function getLoadMoreList(page: number, pageSize: number) {
         const start = (page - 1) * pageSize;
         const end = page * pageSize;
@@ -39,6 +40,7 @@ export default function GalleryContainer({tokenIds}: GalleryContainerProps) {
                         <GalleryArtworkCard
                             key={index}
                             tokenId={tokenId}
+                            isMy={isMy}
                         />
                     ))}
                 </div>
