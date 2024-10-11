@@ -7,6 +7,8 @@ import {Metadata} from "@/types";
 import {useRequest} from "ahooks";
 import {useState} from "react";
 import {getUserByAddress} from "@/backend/actions/users";
+import SellDialog from "@/components/sell-dialog";
+import {formatEther, parseEther} from "viem";
 
 interface GalleryArtworkCardProps {
     tokenId: bigint
@@ -80,10 +82,25 @@ export default function GalleryArtworkCard({tokenId}: GalleryArtworkCardProps) {
                     }
                 </div>
             </div>
-            <Button className="bg-sky-400 hover:bg-sky-500 float-right ml-2">
+            {
+                isSellable && price &&
+                <p className="float-left text-gray-400 text-sm">
+                    {formatEther(price)} ETH
+                </p>
+            }
+
+            <Button className="bg-sky-400 hover:bg-sky-500 float-right ml-2 w-16">
                 View
             </Button>
-
+            {
+                isSellable!==undefined &&
+                <SellDialog
+                    isSellable={isSellable}
+                    tokenId={tokenId}
+                    img={artwork.image}
+                    price={price ? formatEther(price) : ''}
+                />
+            }
         </div>
     )
 }
