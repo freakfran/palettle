@@ -5,9 +5,9 @@ export const users = pgTable("user", {
     address: text("address")
         .primaryKey(),
     nickname: text("nickname"),
-    avatarId: text("avatar_id"),
-    profileId: text("profile_id"),
-    indexId: text("index_id"),
+    avatar: text("avatar"),
+    profile: text("profile"),
+    index: text("index"),
     xAccount: text("x_account"),
 })
 
