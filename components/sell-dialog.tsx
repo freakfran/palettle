@@ -1,12 +1,12 @@
 'use client'
 
 import {z} from "zod";
-import {useWriteContract} from "wagmi";
+import {useWaitForTransactionReceipt, useWriteContract} from "wagmi";
 import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger} from "@/components/ui/dialog";
 import {Button} from "@/components/ui/button";
-import React from "react";
+import React, {useEffect} from "react";
 import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
 import {Input} from "@/components/ui/input";
 import Image from "next/image";
@@ -31,16 +31,16 @@ interface SellDialogProps {
 
 export default function SellDialog({tokenId, img, isSellable, price}: SellDialogProps) {
     const {
+        data: hash,
         isPending,
         error,
         writeContract
-    } = useWriteContract({
-        mutation: {
-            onSuccess: () => {
-                window.location.reload()
-            }
-        }
-    });
+    } = useWriteContract();
+
+    const {isLoading: isConfirming, isSuccess: isConfirmed} =
+        useWaitForTransactionReceipt({
+            hash,
+        })
 
     const form = useForm<z.infer<typeof sellSchema>>({
         resolver: zodResolver(sellSchema),
@@ -61,6 +61,12 @@ export default function SellDialog({tokenId, img, isSellable, price}: SellDialog
             args: [tokenId, BigInt(0), false],
         })
     }
+
+    useEffect(() => {
+        if (isConfirmed) {
+            window.location.reload()
+        }
+    }, [isConfirmed]);
 
 
     return (
@@ -120,7 +126,7 @@ export default function SellDialog({tokenId, img, isSellable, price}: SellDialog
                                 isSellable &&
                                 <Button
                                     variant="destructive"
-                                    disabled={isPending}
+                                    disabled={isPending || isConfirming}
                                     type="button"
                                     onClick={stopSelling}
                                 >
@@ -128,7 +134,7 @@ export default function SellDialog({tokenId, img, isSellable, price}: SellDialog
                                 </Button>
                             }
 
-                            <Button disabled={isPending}
+                            <Button disabled={isPending || isConfirming}
                                     type="submit">
                                 Confirm
                             </Button>

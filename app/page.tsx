@@ -3,7 +3,7 @@ import {PicCardProps} from "@/components/pic-card";
 import MoveCarousel from "@/components/move-carousel";
 import CreatorCarousel from "@/components/creator-carousel";
 import {CreatorProps} from "@/components/creator";
-import Tabspanel from "@/components/tabspanel";
+import TabsPanel from "@/components/tabs-panel";
 
 
 /**
@@ -93,7 +93,7 @@ function renderArtworks() {
         <section className="bg-[#f8f9fc] p-[90px] relative flex flex-col items-center">
             <div className="container">
                 <div className="p-0 relative shrink-0 w-full max-w-full	mt-auto flex flex-wrap box-border">
-                    <Tabspanel tags={['Abstract', 'Digital', 'Photography', 'Painting']}/>
+                    <TabsPanel tags={['Abstract', 'Digital', 'Photography', 'Painting']}/>
                 </div>
             </div>
         </section>
