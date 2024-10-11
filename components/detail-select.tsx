@@ -9,9 +9,9 @@ import {
   
 export default function DetailSelect (){
     return (
-    <Select>
+    <Select defaultValue="Wallet">
       <SelectTrigger className="w-[180px]">
-      <SelectValue placeholder = "" />
+      <SelectValue />
       </SelectTrigger>
       <SelectContent>
         <SelectItem value="Wallet">Set up Your Wallet</SelectItem>

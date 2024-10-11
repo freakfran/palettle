@@ -22,6 +22,14 @@ export default function DetailCard({
   authorImg,
   seller,
 }: DetailCardProps) {
+  const imageStyle = {
+    width: '550px',
+    height: '690px',
+    borderRadius: '3%',
+    minWidth: '550px',
+    minHeight: '690px',
+  }
+  
   return (
     <div className="flex mt-5 justify-center mx-auto align-center">
       <div className="">
@@ -31,8 +39,8 @@ export default function DetailCard({
           width={0}
           height={0}
           sizes="300vw"
-          style={{ width: "auto", height: "auto" }}
-          className="rounded-3xl"
+          style={imageStyle}
+          className=" "
         />
       </div>
       <div className="mt-4 ms-12 ml-2">
