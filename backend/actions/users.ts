@@ -19,9 +19,9 @@ export async function getOrInsertUserByAddress(address: string) {
         await db.insert(users).values({
             address,
             nickname: address,
-            avatarId: env.DEFAULT_AVATAR_ID,
-            profileId: env.DEFAULT_PROFILE_ID,
-            indexId: env.DEFAULT_INDEX_ID,
+            avatar: env.DEFAULT_AVATAR,
+            profile: env.DEFAULT_PROFILE,
+            index: env.DEFAULT_INDEX,
         });
 
         existingUser = await db.query.users.findFirst(

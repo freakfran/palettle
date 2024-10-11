@@ -21,7 +21,7 @@ import {insertArtwork} from "@/backend/actions/token";
 const uploadArtSchema = z.object({
     file: z
         .instanceof(FileList)
-        .refine((file) => file?.length == 1, 'File is required.')
+        .refine((file) => file && file.length == 1, 'File is required.')
         .refine((file) => file?.[0].type.startsWith('image/'), 'File must be an image.'),
     tag: z.array(
         z.object({

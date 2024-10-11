@@ -11,9 +11,7 @@ import {
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
 import {getOrInsertUserByAddress} from "@/backend/actions/users";
 import {useRequest} from "ahooks";
-import {useDisconnect, useReadContract} from "wagmi";
-import {paletteContractConfig} from "@/utils/pattle";
-import {getTokenByUri} from "@/backend/actions/token";
+import {useDisconnect} from "wagmi";
 import {compressString} from "@/utils/common";
 import Link from "next/link";
 
@@ -24,32 +22,10 @@ interface ProfileButtonProps {
 export default function ProfileButton({address}: ProfileButtonProps) {
 
     // 根据用户地址获取用户
-    const {data: user, loading} = useRequest(
+    const {data: user} = useRequest(
         async () => await getOrInsertUserByAddress(address),
         {
             manual: false,
-        }
-    );
-
-    // 获取用户头像tokenUri
-    const {data: tokenUri, error} = useReadContract({
-        ...paletteContractConfig,
-        functionName: 'tokenURI',
-        args: [BigInt(user ? user.avatarId! : 0)],
-        query: {
-            enabled: !loading
-        }
-    });
-
-    if (error) {
-        console.log(error)
-    }
-
-    //获取元数据
-    const {data: metadata} = useRequest(
-        async () => await getTokenByUri(tokenUri!),
-        {
-            ready: !!tokenUri,
         }
     );
 
@@ -61,7 +37,7 @@ export default function ProfileButton({address}: ProfileButtonProps) {
             <DropdownMenuTrigger>
                 <Avatar>
                     {
-                        metadata && <AvatarImage src={metadata.image} alt="Profile picture"/>
+                        user && <AvatarImage src={user.avatar!} alt="Profile picture"/>
                     }
                     <AvatarFallback>CN</AvatarFallback>
                 </Avatar>

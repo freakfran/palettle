@@ -5,6 +5,8 @@ import {useReadContract} from "wagmi";
 import {paletteContractConfig} from "@/utils/pattle";
 import {Metadata} from "@/types";
 import {useRequest} from "ahooks";
+import {useState} from "react";
+import {getUserByAddress} from "@/backend/actions/users";
 
 interface GalleryArtworkCardProps {
     tokenId: bigint
@@ -12,16 +14,39 @@ interface GalleryArtworkCardProps {
 
 export default function GalleryArtworkCard({tokenId}: GalleryArtworkCardProps) {
 
+    const [authorImg,setAuthorImg] = useState('')
+
     const {data: jsonUrl} = useReadContract({
         ...paletteContractConfig,
         functionName: 'tokenURI',
         args: [tokenId],
     })
 
+
+    const {data: isSellable} = useReadContract({
+        ...paletteContractConfig,
+        functionName: 'getIsSellable',
+        args: [tokenId]
+    })
+
+    const {data: price} = useReadContract({
+        ...paletteContractConfig,
+        functionName: 'getPrice',
+        args: [tokenId],
+        query: {
+            enabled: isSellable
+        }
+    })
+
     async function fetchArtwork(url: string) {
         const data = await fetch(url)
         const metadata: Metadata = await data.json()
-        console.log(metadata)
+        if(metadata.attribution.authorAddress){
+            const author = await getUserByAddress(metadata.attribution.authorAddress)
+            if(author && author.avatar){
+                setAuthorImg(author.avatar)
+            }
+        }
         return metadata
     }
 
@@ -51,7 +76,7 @@ export default function GalleryArtworkCard({tokenId}: GalleryArtworkCardProps) {
                 >
                     {
                         artwork.attribution.tags ?
-                        artwork.attribution.tags.split(',')[0] : 'Empty'
+                            artwork.attribution.tags.split(',')[0] : 'Empty'
                     }
                 </div>
             </div>
