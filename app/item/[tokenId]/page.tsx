@@ -1,7 +1,6 @@
 import Breadcrumb from "@/components/bread-crumb";
 import DetailCard, { DetailCardProps } from "@/components/detail-card";
 
-
 export default function Page() {
   const art: DetailCardProps = {
     title: "Create And Sell Your NFTs",
@@ -23,21 +22,6 @@ export default function Page() {
                 bg-no-repeat"
     >
       <div className="mx-[370px]">
-        <div className="mt-20">
-          <Breadcrumb />
-        </div>
-        <div className="m-auto">
-            <div className="text-center ">
-              <div className="mt-4">
-                <h1 className="font-bold text-[#183b56] leading-6 mb-7 text-4xl mt-10 font-serif">Item Details</h1>
-                <p className="text-[#6b6e6f] text-sm">
-                  {">"}A New Place To Collect And Connect NFT Across The World.
-                  It’s come with a creative design, <br /> home page options,
-                  different explore and digital asset pages and items.
-                </p>
-              </div>
-            </div>
-        </div>
         <DetailCard
           key={art.title}
           title={art.title}
