@@ -16,7 +16,8 @@ import {formatDate} from "@/utils/common";
 import {getUserByAddress} from "@/backend/actions/users";
 import {paletteContractConfig} from "@/utils/pattle";
 import {useRequest} from "ahooks";
-import {insertArtwork} from "@/backend/actions/token";
+import {insertArtwork, insertUserTag} from "@/backend/actions/token";
+import {hexToNumber} from "viem";
 
 const uploadArtSchema = z.object({
     file: z
@@ -106,7 +107,11 @@ export default function UploadPicDialog({allTags}: { allTags: string[] }) {
     };
 
     const saveToDatabase = async (tokenId: string) => {
-        await insertArtwork(tokenId, tags.map((tag) => (tag.text)))
+        const values = form.getValues()
+        const number = hexToNumber(tokenId as `0x${string}`).toString()
+        const tagArr = tags.map((tag) => (tag.text))
+        await insertArtwork(number, address!, values.title, values.description,tagArr)
+        await insertUserTag(address!, tagArr)
     }
 
     const {

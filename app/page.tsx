@@ -4,6 +4,7 @@ import MoveCarousel from "@/components/move-carousel";
 import CreatorCarousel from "@/components/creator-carousel";
 import {CreatorProps} from "@/components/creator";
 import TabsPanel from "@/components/tabs-panel";
+import {fetchAllTags} from "@/backend/actions/token";
 
 
 /**
@@ -88,12 +89,13 @@ function renderTop() {
     );
 }
 
-function renderArtworks() {
+async function renderArtworks() {
+    const tags = await fetchAllTags()
     return (
         <section className="bg-[#f8f9fc] p-[90px] relative flex flex-col items-center">
             <div className="container">
                 <div className="p-0 relative shrink-0 w-full max-w-full	mt-auto flex flex-wrap box-border">
-                    <TabsPanel tags={['Abstract', 'Digital', 'Photography', 'Painting']}/>
+                    <TabsPanel tags={tags.slice(0, 4)}/>
                 </div>
             </div>
         </section>

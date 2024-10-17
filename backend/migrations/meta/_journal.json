@@ -50,6 +50,13 @@
       "when": 1728615763998,
       "tag": "0006_free_whiplash",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1729133759461,
+      "tag": "0007_hot_jubilee",
+      "breakpoints": true
     }
   ]
 }

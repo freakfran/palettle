@@ -17,7 +17,6 @@ function getArtworks(tag: string) {
       authorImg: `https://picsum.photos/id/${seed + i}/200/300`,
       image: `https://picsum.photos/id/${seed + i + 1}/200/300`,
       price: "0.08",
-      stock: "3",
       title: "Cool art",
     });
   }

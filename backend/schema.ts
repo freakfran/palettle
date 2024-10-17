@@ -26,3 +26,10 @@ export const tag_artworks = pgTable("tag_artwork", {
     artworkId: text("artwork_id"),
     tag: text("tag"),
 })
+
+export const user_artworks = pgTable("user_artworks", {
+    id: text("id")
+        .primaryKey(),
+    userAddress: text("user_address"),
+    tag: text("tag"),
+})

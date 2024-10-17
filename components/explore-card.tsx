@@ -9,7 +9,7 @@ export interface ExploreCardProps {
     authorImg: string;
     image: string;
     title: string;
-    stock: string;
+    // stock: string;
     price: string;
 }
 
@@ -19,7 +19,6 @@ export default function ExploreCard({
                                         authorImg,
                                         image,
                                         title,
-                                        stock,
                                         price,
                                     }: ExploreCardProps) {
     return (
@@ -44,7 +43,7 @@ export default function ExploreCard({
             <div>
                 <h6 className="font-bold text-lg">{title}</h6>
                 <div className="flex justify-between my-2">
-                    <p className="font-medium text-[#6b6e6f] text-sm">{stock} in stock</p>
+                    {/*<p className="font-medium text-[#6b6e6f] text-sm">{stock} in stock</p>*/}
                     <p className="font-medium text-green-700 text-sm">{price} ETH</p>
                 </div>
             </div>
