@@ -6,7 +6,7 @@ import {useRequest} from "ahooks";
 import {getTokenByUri} from "@/backend/actions/token";
 import {formatEther} from "viem";
 import {getUserByAddress} from "@/backend/actions/users";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {compressString} from "@/utils/common";
 
 export interface PicCardProps {
