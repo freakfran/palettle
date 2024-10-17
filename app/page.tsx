@@ -1,107 +1,7 @@
-import SearchBar from "@/components/search-bar";
-import {PicCardProps} from "@/components/pic-card";
-import MoveCarousel from "@/components/move-carousel";
-import CreatorCarousel from "@/components/creator-carousel";
-import {CreatorProps} from "@/components/creator";
-import TabsPanel from "@/components/tabs-panel";
-import {fetchAllTags} from "@/backend/actions/token";
+'use client'
+import TopContainer from "@/components/top-container";
+import ArtworkContainer from "@/components/artwork-container";
 
-
-/**
- * 搜索框+轮播图
- */
-function renderTop() {
-    const backgroundUrl = './bg-index.png';
-    const arts: PicCardProps[] = [
-        {
-            image: 'https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oEVmECroFzAwUFAvAKfAA9lADAlgoC9fIlt45h~tplv-dy-aweme-images:q75.webp?biz_tag=aweme_images&from=327834062&s=PackSourceEnum_AWEME_DETAIL&sc=image&se=false&x-expires=1729767600&x-signature=9jlJn1UqJf2hvEmbSIfOxIkk84w%3D',
-            title: '芙莉莲',
-            tag: 'anime',
-            price: '100',
-            author: '_犬野子',
-            authorImg: 'https://p3-pc.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-i-0813c001_okm6WAK6rCArtDIkClebACg1rs5AOTEe9AnKAq.jpeg?from=327834062'
-        },
-        {
-            image: 'https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oACDC8nx9AAhPQA0fADIIFCAQA8guGAJAlbexA~tplv-dy-aweme-images:q75.webp?biz_tag=aweme_images&from=327834062&s=PackSourceEnum_AWEME_DETAIL&sc=image&se=false&x-expires=1729767600&x-signature=WVqF2sxejVhfDrkdZ%2Ba3o8K%2BcAs%3D',
-            title: '111222',
-            tag: 'anime',
-            price: '150',
-            author: '_犬野子',
-            authorImg: 'https://p3-pc.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-i-0813c001_okm6WAK6rCArtDIkClebACg1rs5AOTEe9AnKAq.jpeg?from=327834062'
-        },
-        {
-            image: 'https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/ocBfAvTD7gEPrAOkARAI9t4e3bCv5BACAnMCgW~tplv-dy-aweme-images:q75.webp?biz_tag=aweme_images&from=327834062&s=PackSourceEnum_AWEME_DETAIL&sc=image&se=false&x-expires=1729767600&x-signature=SBXPyRHGu9BSbV8G6F0vEu%2BgFlE%3D',
-            title: '女仆',
-            tag: 'waifu',
-            price: '10',
-            author: '_犬野子',
-            authorImg: 'https://p3-pc.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-i-0813c001_okm6WAK6rCArtDIkClebACg1rs5AOTEe9AnKAq.jpeg?from=327834062'
-        },
-        {
-            image: 'https://i0.hdslb.com/bfs/new_dyn/a43a2be254e0c64de608de3cbfbc1e5f379292351.jpg@1052w_!web-dynamic.avif',
-            title: '初音未来',
-            tag: 'miku',
-            price: '10',
-            author: '极夜繁声',
-            authorImg: 'https://i2.hdslb.com/bfs/face/ae3de0cc8211ca2141e821615397464ddd6e9b62.jpg'
-        },
-        {
-            image: 'https://i0.hdslb.com/bfs/new_dyn/a43a2be254e0c64de608de3cbfbc1e5f379292351.jpg@1052w_!web-dynamic.avif',
-            title: '初音未来',
-            tag: 'miku',
-            price: '10',
-            author: '极夜繁声',
-            authorImg: 'https://i2.hdslb.com/bfs/face/ae3de0cc8211ca2141e821615397464ddd6e9b62.jpg'
-        },
-        {
-            image: 'https://i0.hdslb.com/bfs/new_dyn/a43a2be254e0c64de608de3cbfbc1e5f379292351.jpg@1052w_!web-dynamic.avif',
-            title: '初音未来',
-            tag: 'miku',
-            price: '10',
-            author: '极夜繁声',
-            authorImg: 'https://i2.hdslb.com/bfs/face/ae3de0cc8211ca2141e821615397464ddd6e9b62.jpg'
-        },
-
-
-    ];
-    return (
-        <section
-            className="overflow-hidden relative min-h-[100vh]
-                flex items-center bg-white pt-[150px]
-                bg-center
-                bg-no-repeat"
-            style={{backgroundImage: `url(${backgroundUrl})`}}
-        >
-            <div className="container ml-auto mr-auto">
-                <div className="flex flex-wrap h-1/2 bg-transparent mb-5">
-                    <div className="w-1/2">
-                        <h1 className="text-[3.5rem] font-bold">
-                            Illuminate Your <span className="text-[#ee574c]"> Life </span> with Art
-                        </h1>
-                        <SearchBar/>
-                    </div>
-                </div>
-                <div className="flex flex-wrap h-1/2 bg-transparent">
-                    <MoveCarousel items={arts}/>
-                </div>
-            </div>
-        </section>
-    );
-}
-
-async function renderArtworks() {
-    const tags = await fetchAllTags()
-    return (
-        <section className="bg-[#f8f9fc] p-[90px] relative flex flex-col items-center">
-            <div className="container">
-                <div className="p-0 relative shrink-0 w-full max-w-full	mt-auto flex flex-wrap box-border">
-                    <TabsPanel tags={tags.slice(0, 4)}/>
-                </div>
-            </div>
-        </section>
-
-    )
-}
 
 /**
  * 作品集
@@ -169,88 +69,84 @@ async function renderArtworks() {
 /**
  * 作者
  */
-function renderCreators() {
-    const creators: CreatorProps[] = [
-        {
-            image: 'https://i0.hdslb.com/bfs/face/ae3de0cc8211ca2141e821615397464ddd6e9b62.jpg',
-            name: '极夜繁声',
-            value: '1.5 ETH'
-        },
-        {
-            image: 'https://i0.hdslb.com/bfs/face/ae3de0cc8211ca2141e821615397464ddd6e9b62.jpg',
-            name: '极夜繁声',
-            value: '1.5 ETH'
-        },
-        {
-            image: 'https://i0.hdslb.com/bfs/face/ae3de0cc8211ca2141e821615397464ddd6e9b62.jpg',
-            name: '极夜繁声',
-            value: '1.5 ETH'
-        },
-        {
-            image: 'https://i0.hdslb.com/bfs/face/ae3de0cc8211ca2141e821615397464ddd6e9b62.jpg',
-            name: '极夜繁声',
-            value: '1.5 ETH'
-        },
-        {
-            image: 'https://i0.hdslb.com/bfs/face/ae3de0cc8211ca2141e821615397464ddd6e9b62.jpg',
-            name: '极夜繁声',
-            value: '1.5 ETH'
-        },
-        {
-            image: 'https://i0.hdslb.com/bfs/face/ae3de0cc8211ca2141e821615397464ddd6e9b62.jpg',
-            name: '极夜繁声',
-            value: '1.5 ETH'
-        },
-        {
-            image: 'https://i0.hdslb.com/bfs/face/ae3de0cc8211ca2141e821615397464ddd6e9b62.jpg',
-            name: '极夜繁声',
-            value: '1.5 ETH'
-        },
-        {
-            image: 'https://i0.hdslb.com/bfs/face/ae3de0cc8211ca2141e821615397464ddd6e9b62.jpg',
-            name: '极夜繁声',
-            value: '1.5 ETH'
-        },
-        {
-            image: 'https://i0.hdslb.com/bfs/face/ae3de0cc8211ca2141e821615397464ddd6e9b62.jpg',
-            name: '极夜繁声',
-            value: '1.5 ETH'
-        },
-        {
-            image: 'https://i0.hdslb.com/bfs/face/ae3de0cc8211ca2141e821615397464ddd6e9b62.jpg',
-            name: '极夜繁声',
-            value: '1.5 ETH'
-        },
-    ]
-
-
-    return (
-        <section className="p-[120px] flex flex-col items-center">
-            <div className="container">
-                <div className="flex justify-between">
-                    <div>
-                        <h2 className="font-bold text-4xl">Artists</h2>
-                    </div>
-                </div>
-                <CreatorCarousel className="mt-12" creators={creators}/>
-            </div>
-        </section>
-    )
-}
+// function renderCreators() {
+//     const creators: CreatorProps[] = [
+//         {
+//             image: 'https://i0.hdslb.com/bfs/face/ae3de0cc8211ca2141e821615397464ddd6e9b62.jpg',
+//             name: '极夜繁声',
+//             value: '1.5 ETH'
+//         },
+//         {
+//             image: 'https://i0.hdslb.com/bfs/face/ae3de0cc8211ca2141e821615397464ddd6e9b62.jpg',
+//             name: '极夜繁声',
+//             value: '1.5 ETH'
+//         },
+//         {
+//             image: 'https://i0.hdslb.com/bfs/face/ae3de0cc8211ca2141e821615397464ddd6e9b62.jpg',
+//             name: '极夜繁声',
+//             value: '1.5 ETH'
+//         },
+//         {
+//             image: 'https://i0.hdslb.com/bfs/face/ae3de0cc8211ca2141e821615397464ddd6e9b62.jpg',
+//             name: '极夜繁声',
+//             value: '1.5 ETH'
+//         },
+//         {
+//             image: 'https://i0.hdslb.com/bfs/face/ae3de0cc8211ca2141e821615397464ddd6e9b62.jpg',
+//             name: '极夜繁声',
+//             value: '1.5 ETH'
+//         },
+//         {
+//             image: 'https://i0.hdslb.com/bfs/face/ae3de0cc8211ca2141e821615397464ddd6e9b62.jpg',
+//             name: '极夜繁声',
+//             value: '1.5 ETH'
+//         },
+//         {
+//             image: 'https://i0.hdslb.com/bfs/face/ae3de0cc8211ca2141e821615397464ddd6e9b62.jpg',
+//             name: '极夜繁声',
+//             value: '1.5 ETH'
+//         },
+//         {
+//             image: 'https://i0.hdslb.com/bfs/face/ae3de0cc8211ca2141e821615397464ddd6e9b62.jpg',
+//             name: '极夜繁声',
+//             value: '1.5 ETH'
+//         },
+//         {
+//             image: 'https://i0.hdslb.com/bfs/face/ae3de0cc8211ca2141e821615397464ddd6e9b62.jpg',
+//             name: '极夜繁声',
+//             value: '1.5 ETH'
+//         },
+//         {
+//             image: 'https://i0.hdslb.com/bfs/face/ae3de0cc8211ca2141e821615397464ddd6e9b62.jpg',
+//             name: '极夜繁声',
+//             value: '1.5 ETH'
+//         },
+//     ]
+//
+//
+//     return (
+//         <section className="p-[120px] flex flex-col items-center">
+//             <div className="container">
+//                 <div className="flex justify-between">
+//                     <div>
+//                         <h2 className="font-bold text-4xl">Artists</h2>
+//                     </div>
+//                 </div>
+//                 <CreatorCarousel className="mt-12" creators={creators}/>
+//             </div>
+//         </section>
+//     )
+// }
 
 
 export default function Home() {
-    const Top = renderTop();
-    const Artworks = renderArtworks();
-    // const Collections = renderCollections();
-    const Creators = renderCreators();
 
     return (
         <>
-            {Top}
-            {Artworks}
+            <TopContainer/>
+            <ArtworkContainer/>
             {/*{Collections}*/}
-            {Creators}
+            {/*{Creators}*/}
         </>
 
     )

@@ -1,16 +1,16 @@
 'use client'
-import PicCard, {PicCardProps} from "@/components/pic-card";
+import PicCard from "@/components/pic-card";
 import Autoplay from "embla-carousel-autoplay"
 import {Carousel, CarouselContent, CarouselItem} from "@/components/ui/carousel";
 import React from "react";
 
 interface MoveCarouselProps {
-    items: PicCardProps[]
+    tokenIds: string[]
 }
 
 
 
-export default function MoveCarousel({items}: MoveCarouselProps) {
+export default function MoveCarousel({tokenIds}: MoveCarouselProps) {
     const plugin = React.useRef(
         Autoplay({
             delay: 2000,
@@ -30,16 +30,12 @@ export default function MoveCarousel({items}: MoveCarouselProps) {
                     delay: 2000,
                 }),
             ]}
+            className="w-full"
         >
             <CarouselContent>
-                {items.map(pic => (
-                    <CarouselItem key={pic.title} className="basis-1/4">
-                        <PicCard image={pic.image}
-                                 title={pic.title}
-                                 tag={pic.tag}
-                                 price={pic.price}
-                                 author={pic.author}
-                                 authorImg={pic.authorImg}/>
+                {tokenIds.map(id => (
+                    <CarouselItem key={id} className="basis-1/4">
+                        <PicCard tokenId={id}/>
                     </CarouselItem>
                 ))}
             </CarouselContent>
