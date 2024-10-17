@@ -21,6 +21,7 @@ interface GalleryArtworkCardProps {
 export default function GalleryArtworkCard({tokenId,isMy}: GalleryArtworkCardProps) {
 
     const [authorImg, setAuthorImg] = useState('')
+    const [author, setAuthor] = useState('')
 
     const {data: jsonUrl} = useReadContract({
         ...paletteContractConfig,
@@ -51,6 +52,7 @@ export default function GalleryArtworkCard({tokenId,isMy}: GalleryArtworkCardPro
             const author = await getUserByAddress(metadata.attribution.authorAddress)
             if (author && author.avatar) {
                 setAuthorImg(author.avatar)
+                setAuthor(author.nickname!)
             }
         }
         return metadata
@@ -103,7 +105,7 @@ export default function GalleryArtworkCard({tokenId,isMy}: GalleryArtworkCardPro
                             <AvatarImage src={authorImg} alt="author"/>
                         </Avatar>
                     </Link>
-                    <p>&nbsp; {compressString(artwork.attribution.author, 10)}</p>
+                    <p>&nbsp; {compressString(author, 10)}</p>
                 </div>
             }
             <Button className="bg-sky-400 hover:bg-sky-500 float-right ml-2 w-16">

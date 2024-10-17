@@ -19,9 +19,9 @@ export default function GalleryPage({params}: { params: { exploreAddress: string
     const {data: tokenIds} = useReadContract({
         ...paletteContractConfig,
         functionName: 'getUserTokenIds',
-        args: [address!],
+        args: [params.exploreAddress[0] ? params.exploreAddress[0] as `0x${string}` : address!],
         query: {
-            enabled: isConnected && !!address,
+            enabled: params.exploreAddress!==undefined || address!==undefined,
         }
     });
 
