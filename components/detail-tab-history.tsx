@@ -1,14 +1,30 @@
+"use client"
+import {getUserByAddress} from "@/backend/actions/users";
+import { useState } from "react";
+
 interface DetailTabHistoryProps {
-  tokenId: string;
+  buyer: string;
+  historyPrice: bigint;
+  time: bigint;
+  nickname: string;
+  buyerImg: string;
 }
-export default function DetailTabHistory({ tokenId } : DetailTabHistoryProps) {
+export default function DetailTabHistory({ buyer, historyPrice, time, nickname } : DetailTabHistoryProps) {
+    const [author, setAuthor] = useState("");
+    const [authorImg, setAuthorImg] = useState("");
+    
+    
+    if (buyer) {
+        const buyerImg = getUserByAddress(buyer)
+    }
+    setAuthorImg(buyerImg.avatar);
   return (
     <div>
       <div className="flex-shrink-0">
         <div className="">
           <img
-            src={authorImg}
-            alt={name}
+            src={buyerImg}
+            alt={nickname}
             width={50}
             height={50}
             className="rounded-full"
@@ -23,7 +39,7 @@ export default function DetailTabHistory({ tokenId } : DetailTabHistoryProps) {
           </span>
           <span className="text-[#6b6e6f]">{buyer}</span>
         </p>
-        <p className="mb-0 text-[#6b6e6f] text-sm mt-1">{timestamp}</p>
+        <p className="mb-0 text-[#6b6e6f] text-sm mt-1">{time}</p>
       </div>
     </div>
   );

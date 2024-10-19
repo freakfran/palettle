@@ -4,27 +4,18 @@ import DetailTabHistory from "./detail-tab-history";
 import { paletteContractConfig } from "@/utils/pattle";
 import { useReadContract } from "wagmi";
 
+
 interface DetailCardProps {
-  authorImg: string;
-  name: string;
-  author: string;
   details: string;
   tokenId: bigint;
 }
 
-export default function DetailTab({
-  authorImg,
-  name,
-  author,
-  details,
-  tokenId,
-}: DetailCardProps) {
-  const { data: history=[] } = useReadContract({
+export default function DetailTab({ details, tokenId }: DetailCardProps) {
+  const { data: history = [] } = useReadContract({
     ...paletteContractConfig,
     functionName: "getHistory",
     args: [tokenId],
   });
-  
   
   const tabContent = {
     tab1: (
@@ -32,13 +23,20 @@ export default function DetailTab({
         <p className="text-[#6b6e6f]">{details}</p>
       </div>
     ),
-    
+
     tab2: (
       <div className="flex flex-wrap">
         <div className="flex items-center rounded-3xl shadow-[0px_3px_10px_0px_rgba(24,59,86,0.08)] p-7 mt-5">
-            {history.map((History,index) => (History
-              <DetailTabHistory />
-            ))}
+          {history.map((item, index) => (
+            <DetailTabHistory
+              key={index}
+              buyer={item.buyer}
+              historyPrice={item.price}
+              time={item.timestamp}
+              buyerImg={buyerImg}
+              nickname={nickname}
+            />
+          ))}
         </div>
       </div>
     ),
