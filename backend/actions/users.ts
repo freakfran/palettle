@@ -1,7 +1,8 @@
 import {db} from "@/backend";
-import {eq} from "drizzle-orm";
+import {and, eq} from "drizzle-orm";
 import {users} from "@/backend/schema";
 import * as env from "@/utils/env"
+import {ne} from "drizzle-orm/sql/expressions/conditions";
 
 
 /**
@@ -33,10 +34,31 @@ export async function getOrInsertUserByAddress(address: string) {
 
     return existingUser;
 }
+
 export async function getUserByAddress(address: string) {
     return db.query.users.findFirst(
         {
             where: eq(users.address, address)
         }
     );
+}
+
+
+export async function updateUserByAddress(address: string, nickname?: string, avatar?: string, description?: string) {
+    if(nickname){
+        const res = await db.query.users.findFirst(
+            {
+                where: and(eq(users.nickname, nickname), ne(users.address, address))
+            }
+        );
+        if(res){
+            throw new Error("Nickname already exists");
+        }
+    }
+
+    await db.update(users).set({
+        nickname: nickname,
+        avatar: avatar,
+        description: description,
+    }).where(eq(users.address, address));
 }

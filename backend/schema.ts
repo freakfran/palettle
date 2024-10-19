@@ -9,6 +9,7 @@ export const users = pgTable("user", {
     profile: text("profile"),
     index: text("index"),
     xAccount: text("x_account"),
+    description: text("description"),
 })
 
 export const artworks = pgTable("artwork", {

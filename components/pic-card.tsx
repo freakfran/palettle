@@ -9,6 +9,7 @@ import {getUserByAddress} from "@/backend/actions/users";
 import {useState} from "react";
 import {compressString} from "@/utils/common";
 import Link from "next/link";
+import {Avatar, AvatarImage} from "@/components/ui/avatar";
 
 export interface PicCardProps {
     tokenId: string
@@ -78,7 +79,9 @@ export default function PicCard({tokenId}: PicCardProps) {
 
                 <div className="mt-3 flex items-center">
                     <Link href={`/gallery/${authorAddress}`} className="mt-3 flex items-center" target="_blank">
-                        <Image className="rounded-full" src={author.avatar!} alt={author.nickname!} width={40} height={40}/>
+                        <Avatar>
+                            <AvatarImage src={author.avatar!} alt={author.nickname!}/>
+                        </Avatar>
                         <h6 className="ml-2 font-bold text-[14px]">{compressString(author.nickname!,10)}</h6>
                     </Link>
 
