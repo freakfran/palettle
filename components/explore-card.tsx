@@ -10,6 +10,7 @@ import {getTokenByUri} from "@/backend/actions/token";
 import {useState} from "react";
 import {getUserByAddress} from "@/backend/actions/users";
 import {formatEther} from "viem";
+import Link from "next/link";
 
 export interface ExploreCardProps {
     className?: string;
@@ -80,9 +81,11 @@ export default function ExploreCard({
 
             <hr className="my-2"/>
 
-            <Button variant="destructive">
-                View
-            </Button>
+            <Link href={`/item/${tokenId}`}>
+                <Button variant="destructive" className="w-full">
+                    View
+                </Button>
+            </Link>
 
         </div>
     )

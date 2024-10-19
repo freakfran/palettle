@@ -61,12 +61,15 @@ export default function PicCard({tokenId}: PicCardProps) {
             </div>
 
             <div className="w-[212px] h-[159px] overflow-hidden rounded-2xl mb-2 relative">
-                <Image
-                    src={metadata.image}
-                    alt={metadata.name}
-                    fill
-                    style={{objectFit: "cover"}}
-                />
+                <Link href={`/item/${tokenId}`}>
+                    <Image
+                        src={metadata.image}
+                        alt={metadata.name}
+                        fill
+                        style={{objectFit: "cover"}}
+                    />
+                </Link>
+
             </div>
 
             <div>

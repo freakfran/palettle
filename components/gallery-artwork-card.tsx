@@ -108,9 +108,12 @@ export default function GalleryArtworkCard({tokenId,isMy}: GalleryArtworkCardPro
                     <p>&nbsp; {compressString(author, 10)}</p>
                 </div>
             }
-            <Button className="bg-sky-400 hover:bg-sky-500 float-right ml-2 w-16">
-                View
-            </Button>
+            <Link href={`/item/${tokenId}`}>
+                <Button className="bg-sky-400 hover:bg-sky-500 float-right ml-2 w-16">
+                    View
+                </Button>
+            </Link>
+
             {
                 isSellable !== undefined && isMy &&
                 <SellDialog
