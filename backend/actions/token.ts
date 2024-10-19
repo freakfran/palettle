@@ -203,6 +203,6 @@ export async function fetchArtworksBySearch(
         offset: offset,
         limit: limit,
         total: total ? total[0].value : 0,
-        list: res.map(item => item.id),
+        list: res ? res.map(item => item.id) : [],
     }
 }
