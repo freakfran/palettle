@@ -50,7 +50,7 @@ export default function ProfileButton({address}: ProfileButtonProps) {
                     <DropdownMenuSeparator/>
                     <DropdownMenuGroup>
                         <DropdownMenuItem>
-                            <Link href={`/profile/${address}`}>
+                            <Link href={`/profile`}>
                                 Profile
                             </Link>
                         </DropdownMenuItem>

@@ -57,6 +57,13 @@
       "when": 1729133759461,
       "tag": "0007_hot_jubilee",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1729323285741,
+      "tag": "0008_lean_mikhail_rasputin",
+      "breakpoints": true
     }
   ]
 }
