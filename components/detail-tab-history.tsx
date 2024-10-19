@@ -6,10 +6,8 @@ interface DetailTabHistoryProps {
   buyer: string;
   historyPrice: bigint;
   time: bigint;
-  nickname: string;
-  buyerImg: string;
 }
-export default function DetailTabHistory({ buyer, historyPrice, time, nickname } : DetailTabHistoryProps) {
+export default function DetailTabHistory({ buyer, historyPrice, time } : DetailTabHistoryProps) {
     const [author, setAuthor] = useState("");
     const [authorImg, setAuthorImg] = useState("");
     
