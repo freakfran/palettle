@@ -74,7 +74,7 @@ export default function ExploreCard({
                 <h6 className="font-bold text-lg">{metadata.name}</h6>
                 <div className="flex justify-between my-2">
                     {/*<p className="font-medium text-[#6b6e6f] text-sm">{stock} in stock</p>*/}
-                    <p className="font-medium text-green-700 text-sm">{price ? formatEther(price) + ' ETH' : ''}</p>
+                    <p className="font-medium text-green-700 text-sm">{price ? formatEther(price) + ' ETH' : 'Not on sell'}</p>
                 </div>
             </div>
 

@@ -8,6 +8,7 @@ import {getUserByAddress} from "@/backend/actions/users";
 import {useRequest} from "ahooks";
 import {fetchAllTags} from "@/backend/actions/token";
 import {useEffect, useState} from "react";
+import {Avatar, AvatarImage} from "@/components/ui/avatar";
 
 
 export default function GalleryPage({params}: { params: { exploreAddress: string } }) {
@@ -34,6 +35,7 @@ export default function GalleryPage({params}: { params: { exploreAddress: string
         if (address) {
             if (!params.exploreAddress || params.exploreAddress[0] === address) {
                 setIsMy(true)
+                run(address)
             } else {
                 setIsMy(false)
                 run(params.exploreAddress[0])
@@ -43,8 +45,17 @@ export default function GalleryPage({params}: { params: { exploreAddress: string
 
 
     return (
+        data &&
         <div className="p-[120px] flex flex-col items-center">
             <div className="shadow-md w-full p-[120px]">
+                <div className="mb-16 flex items-center">
+                    <Avatar className="w-[100px] h-[100px]">
+                        <AvatarImage src={data.avatar!} alt="avatar"/>
+                    </Avatar>
+                    <p className="ml-10 font-bold text-gray-400 text-lg">
+                        {data.description ? data.description : ''}
+                    </p>
+                </div>
                 <div className="flex justify-between items-center mb-5">
                     <h2 className="font-bold text-4xl">
                         {

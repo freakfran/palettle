@@ -73,7 +73,7 @@ export default function PicCard({tokenId}: PicCardProps) {
                 <h6 className="font-bold text-lg">{metadata.name}</h6>
                 <p className="font-medium text-[#e46e2a] text-sm">
                     {
-                        formatEther(price).toString() === '0' ? '' : formatEther(price).toString() + 'ETH'
+                        formatEther(price).toString() === '0' ? '' : formatEther(price).toString() + ' ETH'
                     }
                 </p>
 
