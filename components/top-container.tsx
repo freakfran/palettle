@@ -1,10 +1,8 @@
 'use client'
 import {fetchRecommendArtworks} from "@/backend/actions/token";
-import SearchBar from "@/components/search-bar";
 import MoveCarousel from "@/components/move-carousel";
 import {useAccount} from "wagmi";
 import {useRequest} from "ahooks";
-
 
 
 export default function TopContainer() {
@@ -32,10 +30,10 @@ export default function TopContainer() {
                         <h1 className="text-[3.5rem] font-bold">
                             Illuminate Your <span className="text-[#ee574c]"> Life </span> with Art
                         </h1>
-                        <SearchBar/>
+                        {/*<SearchBar/>*/}
                     </div>
                 </div>
-                <div className="flex flex-wrap h-1/2 bg-transparent">
+                <div className="flex flex-wrap h-1/2 bg-transparent mt-10">
                     <MoveCarousel tokenIds={tokenIds}/>
                 </div>
             </div>

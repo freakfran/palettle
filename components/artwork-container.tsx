@@ -8,7 +8,7 @@ export default async function ArtworkContainer() {
         <section className="bg-[#f8f9fc] p-[90px] relative flex flex-col items-center">
             <div className="container">
                 <div className="p-0 relative shrink-0 w-full max-w-full	mt-auto flex flex-wrap box-border">
-                    <TabsPanel tags={tags.slice(0, 4)}/>
+                    <TabsPanel tags={tags.length > 12 ? tags.slice(0, 12) : tags}/>
                 </div>
             </div>
         </section>
