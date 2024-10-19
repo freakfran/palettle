@@ -88,9 +88,6 @@ export default function DetailCard({ tokenId }: DetailCardProps) {
             ))}
           </div>
           <DetailTab
-            authorImg={authorImg}
-            name={artwork.name}
-            author={artwork.attribution.author}
             details={artwork.description}
             tokenId={tokenId}
           />
