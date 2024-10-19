@@ -1,6 +1,7 @@
 "use client"
 import {getUserByAddress} from "@/backend/actions/users";
 import { useState } from "react";
+import { useEffect } from "react";
 
 interface DetailTabHistoryProps {
   buyer: string;
@@ -10,19 +11,34 @@ interface DetailTabHistoryProps {
 export default function DetailTabHistory({ buyer, historyPrice, time } : DetailTabHistoryProps) {
     const [author, setAuthor] = useState("");
     const [authorImg, setAuthorImg] = useState("");
+    const HistoryPrice = historyPrice.toString();
+
     
+    useEffect(() => {
+        const fetchUser = async () => {
+          try {
+            if (buyer) {
+              const buyerData = await getUserByAddress(buyer);
+              if (buyerData && buyerData.avatar) {
+                setAuthorImg(buyerData.avatar);
+                setAuthor(buyerData.nickname!)
+              }
+            }
+          } catch (error) {
+            console.error("Error fetching user data:", error);
+          }
+        };
     
-    if (buyer) {
-        const buyerImg = getUserByAddress(buyer)
-    }
-    setAuthorImg(buyerImg.avatar);
+        fetchUser();
+      }, [buyer]);
+    
   return (
     <div>
       <div className="flex-shrink-0">
         <div className="">
           <img
-            src={buyerImg}
-            alt={nickname}
+            src={authorImg}
+            alt={author}
             width={50}
             height={50}
             className="rounded-full"
@@ -33,9 +49,9 @@ export default function DetailTabHistory({ buyer, historyPrice, time } : DetailT
         <p className="mb-0 text-[#000000] text-sm">
           Bid Accepted By
           <span className="text-[#ee574c] font-bold ms-1 text-xs">
-            {historyPrice} ETH
+            {HistoryPrice} ETH
           </span>
-          <span className="text-[#6b6e6f]">{buyer}</span>
+          <span className="text-[#010708]">{author}</span>
         </p>
         <p className="mb-0 text-[#6b6e6f] text-sm mt-1">{time}</p>
       </div>
