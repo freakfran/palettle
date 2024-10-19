@@ -3,8 +3,8 @@ import {db} from "@/backend";
 import {artworks, tag_artworks, user_artworks} from "@/backend/schema";
 import {uuidv4} from "@walletconnect/utils";
 import {desc} from "drizzle-orm/sql/expressions/select";
-import {eq} from "drizzle-orm";
-import {inArray, notInArray} from "drizzle-orm/sql/expressions/conditions";
+import {and, countDistinct, eq, or} from "drizzle-orm";
+import {inArray, like, notInArray} from "drizzle-orm/sql/expressions/conditions";
 
 export async function getTokenByUri(uri: string) {
     const response = await fetch(uri);
@@ -72,11 +72,9 @@ export async function fetchRecommendArtworks(address?: string) {
         })).map(tag => tag.tag!)
 
 
-
         const tokenIds = (await db.query.tag_artworks.findMany({
             where: inArray(tag_artworks.tag, tags)
         })).map(item => item.artworkId!)
-
 
 
         res = await db.query.artworks.findMany({
@@ -99,4 +97,112 @@ export async function fetchRecommendArtworks(address?: string) {
     }
 
     return res
+}
+
+
+export interface SearchResult {
+    offset: number,
+    limit: number,
+    total: number,
+    list: string[],
+}
+
+export async function fetchArtworksBySearch(
+    limit: number,
+    offset: number,
+    search?: string,
+    tag?: string) {
+    let res;
+    let total;
+    if (!search && !tag) {
+        total = await db.select({value: countDistinct(artworks.id)}).from(artworks)
+        if (total[0].value > 0) {
+            res = await db.selectDistinct({id: artworks.id, createdAt: artworks.createdAt}).from(artworks)
+                .orderBy(desc(artworks.createdAt))
+                .limit(limit)
+                .offset(offset)
+        }
+    } else if (search && !tag) {
+        total = await db.select({value: countDistinct(artworks.id)}).from(artworks)
+            .leftJoin(tag_artworks, eq(tag_artworks.artworkId, artworks.id))
+            .where(
+                or(
+                    like(artworks.title, `%${search}%`),
+                    like(tag_artworks.tag, `%${search}%`),
+                    eq(artworks.authorAddress, search),
+                )
+            )
+
+        if (total[0].value > 0) {
+            res = await db.selectDistinct({id: artworks.id, createdAt: artworks.createdAt}).from(artworks)
+                .leftJoin(tag_artworks, eq(tag_artworks.artworkId, artworks.id))
+                .where(
+                    or(
+                        like(artworks.title, `%${search}%`),
+                        like(tag_artworks.tag, `%${search}%`),
+                        eq(artworks.authorAddress, search),
+                    )
+                )
+                .orderBy(desc(artworks.createdAt))
+                .limit(limit)
+                .offset(offset)
+        }
+
+    } else if (!search && tag) {
+        total = await db.select({value: countDistinct(artworks.id)}).from(artworks)
+            .leftJoin(tag_artworks, eq(tag_artworks.artworkId, artworks.id))
+            .where(eq(tag_artworks.tag, tag))
+        if (total[0].value > 0) {
+            res = await db.selectDistinct({id: artworks.id, createdAt: artworks.createdAt}).from(artworks)
+                .leftJoin(tag_artworks, eq(tag_artworks.artworkId, artworks.id))
+                .where(eq(tag_artworks.tag, tag))
+                .orderBy(desc(artworks.createdAt))
+                .limit(limit)
+                .offset(offset)
+        }
+
+    } else if (search && tag) {
+        const tempIds = (
+            await db
+                .selectDistinct({id: tag_artworks.artworkId})
+                .from(tag_artworks)
+                .where(eq(tag_artworks.tag, tag))
+        ).map(item => item.id!)
+
+        total = await db.select({value: countDistinct(artworks.id)}).from(artworks)
+            .leftJoin(tag_artworks, eq(tag_artworks.artworkId, artworks.id))
+            .where(
+                and(
+                    or(
+                        like(artworks.title, `%${search}%`),
+                        like(tag_artworks.tag, `%${search}%`),
+                    ),
+                    inArray(artworks.id, tempIds),
+                )
+            )
+
+        if (total[0].value > 0) {
+            res = await db.selectDistinct({id: artworks.id, createdAt: artworks.createdAt}).from(artworks)
+                .leftJoin(tag_artworks, eq(tag_artworks.artworkId, artworks.id))
+                .where(
+                    and(
+                        or(
+                            like(artworks.title, `%${search}%`),
+                            like(tag_artworks.tag, `%${search}%`),
+                        ),
+                        inArray(artworks.id, tempIds),
+                    )
+                )
+                .orderBy(desc(artworks.createdAt))
+                .limit(limit)
+                .offset(offset)
+        }
+    }
+
+    return {
+        offset: offset,
+        limit: limit,
+        total: total ? total[0].value : 0,
+        list: res.map(item => item.id),
+    }
 }

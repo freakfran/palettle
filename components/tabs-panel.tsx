@@ -1,61 +1,74 @@
 "use client";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import ExploreCard, { ExploreCardProps } from "./explore-card";
-import { useState } from "react";
+import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/components/ui/tabs";
+import ExploreCard from "./explore-card";
+import {useState} from "react";
+import {useInfiniteScroll} from "ahooks";
+import {fetchArtworksBySearch} from "@/backend/actions/token";
+import {Button} from "@/components/ui/button";
 
 interface TabsPanelProps {
-  tags: string[];
+    tags: string[];
 }
 
-function getArtworks(tag: string) {
-  const seed = tag.length;
+export default function TabsPanel({tags}: TabsPanelProps) {
+    const [selected, setSelected] = useState("ALL");
 
-  const artworks: ExploreCardProps[] = [];
-  for (let i = 0; i < 8; i++) {
-    artworks.push({
-      author: "test",
-      authorImg: `https://picsum.photos/id/${seed + i}/200/300`,
-      image: `https://picsum.photos/id/${seed + i + 1}/200/300`,
-      price: "0.08",
-      title: "Cool art",
-    });
-  }
+    const {
+        data: answer,
+        loadMore,
+        loadingMore
+    } = useInfiniteScroll(
+        (d) =>
+            fetchArtworksBySearch(
+                d ? d?.limit : 8,
+                d ? d?.offset + d?.limit : 0,
+                undefined,
+                selected === "ALL" ? undefined : selected,
+            ),
+        {
+            reloadDeps: [selected]
+        }
+    );
 
-  return artworks;
-}
+    return (
+        <Tabs
+            defaultValue="ALL"
+            className="ml-auto mr-auto w-full "
+            onValueChange={(value) => setSelected(value)}
+        >
+            <div className="mb-5">
+                <div>
+                    <h2 className="font-bold text-3xl text-[#183b56]">Explore</h2>
+                </div>
+            </div>
+            <TabsList className="h-auto rounded-full w-fit p-4">
+                <TabsTrigger key="ALL" className="" value="ALL">
+                    ALL
+                </TabsTrigger>
+                {tags.map((tag) => (
+                    <TabsTrigger key={tag} className="text-base ml-8" value={tag}>
+                        {tag}
+                    </TabsTrigger>
+                ))}
+            </TabsList>
 
-export default function TabsPanel({ tags }: TabsPanelProps) {
-  const [selected, setSelected] = useState("ALL");
+            <TabsContent className="flex flex-wrap gap-5" value={selected}>
+                {answer &&
+                    answer.list.map((tokenId, index) => (
+                        <ExploreCard className="mb-5 flex-[0_0_calc(25%-20px)]" key={index} tokenId={tokenId} />
+                    ))}
 
-  const answer = getArtworks(selected);
-  return (
-    <Tabs
-      defaultValue="ALL"
-      className="ml-auto mr-auto w-full "
-      onValueChange={(value) => setSelected(value)}
-    >
-      <div className="mb-5">
-        <div>
-          <h2 className="font-bold text-3xl text-[#183b56]">Explore</h2>
-        </div>
-      </div>
-      <TabsList className="h-auto rounded-full w-fit p-4">
-        <TabsTrigger key="ALL" className="" value="ALL">
-          ALL
-        </TabsTrigger>
-        {tags.map((tag) => (
-          <TabsTrigger key={tag} className="text-base ml-8" value={tag}>
-            {tag}
-          </TabsTrigger>
-        ))}
-      </TabsList>
-
-      <TabsContent className="columns-4 items-end" value={selected}>
-        {answer &&
-          answer.map((artwork, index) => (
-            <ExploreCard className="mb-5" key={index} {...artwork} />
-          ))}
-      </TabsContent>
-    </Tabs>
-  );
+            </TabsContent>
+            {
+                answer?.total > answer?.limit + answer?.offset ? (
+                    <div className="text-center mt-3">
+                        <Button className="ml-auto mr-auto" variant="destructive" onClick={loadMore}
+                                disabled={loadingMore}>
+                            {loadingMore ? 'Loading...' : 'Load more'}
+                        </Button>
+                    </div>
+                ) : null
+            }
+        </Tabs>
+    );
 }
