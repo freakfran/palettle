@@ -33,8 +33,6 @@ export default function DetailTab({ details, tokenId }: DetailCardProps) {
               buyer={item.buyer}
               historyPrice={item.price}
               time={item.timestamp}
-              buyerImg={buyerImg}
-              nickname={nickname}
             />
           ))}
         </div>
