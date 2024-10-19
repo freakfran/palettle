@@ -1,19 +1,12 @@
-import Breadcrumb from "@/components/bread-crumb";
-import DetailCard, { DetailCardProps } from "@/components/detail-card";
-
-export default function Page() {
-  const art: DetailCardProps = {
-    title: "Create And Sell Your NFTs",
-    like: "99k",
-    price: "99",
-    image:
-      "https://i0.hdslb.com/bfs/new_dyn/a43a2be254e0c64de608de3cbfbc1e5f379292351.jpg@1052w_!web-dynamic.avif",
-    author: "_犬野子",
-    authorImg:
-      "https://p3-pc.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-i-0813c001_okm6WAK6rCArtDIkClebACg1rs5AOTEe9AnKAq.jpeg?from=327834062",
-    seller: "芙莉莲",
-  };
-
+import DetailCard from "@/components/detail-card";
+interface PageProps {
+  params: { tokenId: string }
+}
+export default function Page({ params } : PageProps ) {
+    const tokenid = BigInt(parseInt(params.tokenId))
+  
+  
+  
   return (
     <section
       className="overflow-hidden relative min-h-[100vh]
@@ -22,17 +15,8 @@ export default function Page() {
                 bg-no-repeat"
     >
       <div className="mx-[370px]">
-        <DetailCard
-          key={art.title}
-          title={art.title}
-          like={art.like}
-          price={art.price}
-          image={art.image}
-          author={art.author}
-          authorImg={art.authorImg}
-          seller={art.seller}
-        />
+      <DetailCard tokenId={tokenid}/>
       </div>
     </section>
-  );
+  )
 }
