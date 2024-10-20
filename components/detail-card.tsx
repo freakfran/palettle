@@ -73,7 +73,7 @@ export default function DetailCard({tokenId}: DetailCardProps) {
     return (
         artwork && (
             <div className="flex mt-5 justify-center mx-auto align-center">
-                <div className="w-[550px] h-[720px] rounded-sm overflow-hidden relative">
+                <div className="w-[600px] h-[720px] rounded-sm overflow-hidden relative">
                     <Image
                         src={artwork.image}
                         alt={artwork.name}

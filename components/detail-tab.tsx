@@ -22,10 +22,10 @@ export default function DetailTab({details, tokenId}: DetailCardProps) {
     return (
         <div
             className="shadow-[0px_3px_10px_0px_rgba(24,59,86,0.08)]
-    p-5 bg-white mt-6 mb-6 rounded-3xl"
+    p-5 bg-white mt-6 mb-6 rounded-3xl w-full"
         >
-            <ul className="justify-start flex flex-wrap">
-                <li className="text-[#183b56] ">
+            <ul className="justify-start flex flex-wrap w-full">
+                <li className="text-[#183b56]">
                     <button
                         className="shadow-[0_3px_10px_0px_rgba(24,59,86,0.08)]
                         bg-[#fff] p-2 w-fit rounded-full text-sm m-2"
@@ -52,20 +52,22 @@ export default function DetailTab({details, tokenId}: DetailCardProps) {
                     </button>
                 </li>
             </ul>
-            <div className="mt-4 ps-3">
+            <div className="mt-4 ps-3 w-full">
                 {sellTab === "tab1" ?
-                    <div className="">
+                    <div className="w-full">
                         <p className="text-[#6b6e6f]">{details}</p>
                     </div> :
                     history ? (
-                        <div className="flex flex-wrap">
+                        <div className="flex flex-wrap w-full">
                             <div
-                                className="flex items-center rounded-3xl
-                                shadow-[0px_3px_10px_0px_rgba(24,59,86,0.08)] p-7 mt-5">
+                                className="flex flex-col items-center rounded-3xl
+                                shadow-[0px_3px_10px_0px_rgba(24,59,86,0.08)] p-7 mt-5 w-full
+                                max-h-30 hover:overflow-y-scroll scroll-smooth">
                                 {
                                     history.map((item, index) => {
                                         return <DetailTabHistory
                                             key={index}
+                                            className="h-16 rounded-full mb-1 p-2"
                                             seller={item.seller}
                                             buyer={item.buyer}
                                             historyPrice={item.price}
