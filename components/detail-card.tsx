@@ -13,6 +13,7 @@ import {getTokenByUri} from "@/backend/actions/token";
 import {useState} from "react";
 import {isBlank} from "@/utils/common";
 import BuyButton from "@/components/buy-button";
+import {Dialog, DialogContent, DialogTrigger} from "@/components/ui/dialog";
 
 export interface DetailCardProps {
     tokenId: bigint;
@@ -74,12 +75,25 @@ export default function DetailCard({tokenId}: DetailCardProps) {
         artwork && (
             <div className="flex mt-5 justify-center mx-auto align-center">
                 <div className="w-[600px] h-[720px] rounded-sm overflow-hidden relative">
-                    <Image
-                        src={artwork.image}
-                        alt={artwork.name}
-                        fill
-                        style={{objectFit: "cover"}}
-                    />
+                    <Dialog>
+                        <DialogTrigger asChild>
+                            <Image
+                                src={artwork.image}
+                                alt={artwork.name}
+                                fill
+                                style={{objectFit: "cover"}}
+                            />
+                        </DialogTrigger>
+                        <DialogContent className="max-w-7xl border-0 bg-transparent p-0">
+                            <div className="relative h-[calc(100vh-220px)] w-full overflow-clip rounded-md bg-transparent shadow-md">
+                                <Image src={artwork.image}
+                                       alt={artwork.name}
+                                       fill
+                                       className="h-full w-full object-contain" />
+                            </div>
+                        </DialogContent>
+                    </Dialog>
+
                 </div>
                 <div className="mt-4 ms-12 ml-2">
                 <h2 className="text-[#183b56] font-bold text-3xl leading-6 mb-7 mt-12">
