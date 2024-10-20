@@ -1,5 +1,5 @@
-"use client";
-import { getUserByAddress } from "@/backend/actions/users";
+"use client"
+import {getUserByAddress} from "@/backend/actions/users";
 import { useState } from "react";
 import { useEffect } from "react";
 
@@ -8,32 +8,27 @@ interface DetailTabHistoryProps {
   historyPrice: bigint;
   time: bigint;
 }
-export default function DetailTabHistory({
-  buyer,
-  historyPrice,
-  time,
-}: DetailTabHistoryProps) {
-  const [author, setAuthor] = useState("");
-  const [authorImg, setAuthorImg] = useState("");
-  const HistoryPrice = historyPrice.toString();
+export default function DetailTabHistory({ buyer, historyPrice, time } : DetailTabHistoryProps) {
+    const [author, setAuthor] = useState("");
+    const [authorImg, setAuthorImg] = useState("");
+    const HistoryPrice = historyPrice.toString();
 
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        if (buyer) {
-          const buyerData = await getUserByAddress(buyer);
-          if (buyerData && buyerData.avatar) {
-            setAuthorImg(buyerData.avatar);
-            setAuthor(buyerData.nickname!);
-          }
-        }
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-      }
-    };
-    fetchUser();
-  }, [buyer]);
+    
 
+       async function fetchUser()  {
+
+            if (buyer) {
+              const buyerData = await getUserByAddress(buyer);
+              if (buyerData && buyerData.avatar) {
+                setAuthorImg(buyerData.avatar);
+                setAuthor(buyerData.nickname!)
+              }
+            }
+          } 
+
+        fetchUser();
+
+    
   return (
     <div>
       <div className="flex-shrink-0">
