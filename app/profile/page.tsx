@@ -20,8 +20,10 @@ import {Avatar, AvatarImage} from "@/components/ui/avatar";
 const profileSchema = z.object({
     nickname: z.string().min(1),
     introduction: z.string().optional(),
-    file: z
-        .instanceof(FileList)
+    file: z.unknown()
+        .transform(value => {
+            return value as FileList
+        })
         .refine((file) => file && file.length == 1, 'File is required.')
         .refine((file) => file?.[0].type.startsWith('image/'), 'File must be an image.')
         .optional()
@@ -56,7 +58,7 @@ export default function Profile() {
 
     const {loading, error, run} = useRequest(updateUser, {
         manual: true,
-        onSuccess: ()=>{
+        onSuccess: () => {
             router.push("/")
         }
     })
@@ -64,8 +66,8 @@ export default function Profile() {
     const {data: user} = useRequest(getUserByAddress, {
         defaultParams: [address!],
         ready: !!address,
-        onSuccess: (res)=> {
-            if(res?.avatar){
+        onSuccess: (res) => {
+            if (res?.avatar) {
                 setImg(res.avatar)
             }
         }
