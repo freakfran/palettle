@@ -1,40 +1,47 @@
 'use client'
 
 import {Button} from "@/components/ui/button";
-import {useWaitForTransactionReceipt, useWriteContract} from "wagmi";
+import {useSendTransaction, useWaitForTransactionReceipt} from "wagmi";
 import {paletteContractConfig} from "@/utils/pattle";
 import {useToast} from "@/hooks/use-toast";
 import {useEffect} from "react";
+import {encodeFunctionData} from "viem";
 
 interface BuyButtonProps {
-    tokenId: string
+    tokenId: bigint
+    price: bigint
     className?: string
 }
 
-export default function BuyButton({tokenId, className}: BuyButtonProps) {
-    const { toast } = useToast()
+export default function BuyButton({tokenId, price, className}: BuyButtonProps) {
+    const {toast} = useToast()
     const {
         data: hash,
         isPending,
         error,
-        writeContract
-    } = useWriteContract();
+        sendTransaction
+    } = useSendTransaction();
 
-    const {isLoading: isConfirming, isSuccess: isConfirmed,error:transactionError    } =
+    const {isLoading: isConfirming, isSuccess: isConfirmed, error: transactionError} =
         useWaitForTransactionReceipt({
             hash,
         });
 
     function buy() {
-        writeContract({
-            ...paletteContractConfig,
-            functionName: 'buy',
-            args: [BigInt(parseInt(tokenId))]
+        sendTransaction({
+            to: paletteContractConfig.address,
+            value: price,
+            data: encodeFunctionData({
+                abi: paletteContractConfig.abi,
+                functionName: 'buy',
+                args: [tokenId],
+            })
         })
     }
 
     useEffect(() => {
-        if(error){
+        if (error) {
+            console.log(error)
             toast(
                 {
                     variant: "destructive",
@@ -42,7 +49,7 @@ export default function BuyButton({tokenId, className}: BuyButtonProps) {
                     description: error.message,
                 }
             )
-        }else if (transactionError){
+        } else if (transactionError) {
             toast(
                 {
                     variant: "destructive",
@@ -50,7 +57,7 @@ export default function BuyButton({tokenId, className}: BuyButtonProps) {
                     description: transactionError.message,
                 }
             )
-        }else if (isConfirmed){
+        } else if (isConfirmed) {
             toast(
                 {
                     description: 'bought successfully!',
@@ -64,10 +71,11 @@ export default function BuyButton({tokenId, className}: BuyButtonProps) {
     return (
         <Button
             className={className}
-            onClick={() => buy()}
+            onClick={buy}
             disabled={isPending || isConfirming}
+            variant="destructive"
         >
-            {isPending || isConfirming ? 'pending...' : 'Buy'}
+            {isPending || isConfirming ? 'pending...' : 'BUY NOW'}
         </Button>
     )
 }

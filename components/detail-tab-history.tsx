@@ -4,6 +4,7 @@ import Image from "next/image";
 import {useRequest} from "ahooks";
 import {formatEther} from "viem";
 import Link from "next/link";
+import {Avatar, AvatarImage} from "@/components/ui/avatar";
 
 interface DetailTabHistoryProps {
     buyer: string;
@@ -26,13 +27,12 @@ export default function DetailTabHistory({buyer, seller, historyPrice, time}: De
         <div className="flex items-center">
             <div className="flex-shrink-0">
                 <Link href={`/gallery/${user.address!}`} target="_blank" className="">
-                    <Image
-                        src={user.avatar!}
-                        alt={user.nickname!}
-                        width={50}
-                        height={50}
-                        className="rounded-full"
-                    />
+                    <Avatar>
+                        <AvatarImage
+                            src={user.avatar!}
+                            alt={user.nickname!}
+                        />
+                    </Avatar>
                 </Link>
             </div>
             <div className="flex-grow-1 ms-3">

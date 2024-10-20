@@ -3,7 +3,7 @@ interface PageProps {
   params: { tokenId: string }
 }
 export default function Page({ params } : PageProps ) {
-    const tokenid = BigInt(parseInt(params.tokenId))
+    const tokenId = BigInt(parseInt(params.tokenId))
   
   
   
@@ -15,7 +15,7 @@ export default function Page({ params } : PageProps ) {
                 bg-no-repeat"
     >
       <div className="mx-[370px]">
-      <DetailCard tokenId={tokenid}/>
+      <DetailCard tokenId={tokenId}/>
       </div>
     </section>
   )
