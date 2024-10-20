@@ -1,57 +1,53 @@
-"use client"
+'use client'
 import {getUserByAddress} from "@/backend/actions/users";
-import { useState } from "react";
-import { useEffect } from "react";
+import Image from "next/image";
+import {useRequest} from "ahooks";
+import {formatEther} from "viem";
+import Link from "next/link";
 
 interface DetailTabHistoryProps {
-  buyer: string;
-  historyPrice: bigint;
-  time: bigint;
+    buyer: string;
+    seller: string;
+    historyPrice: bigint;
+    time: bigint;
 }
-export default function DetailTabHistory({ buyer, historyPrice, time } : DetailTabHistoryProps) {
-    const [author, setAuthor] = useState("");
-    const [authorImg, setAuthorImg] = useState("");
-    const HistoryPrice = historyPrice.toString();
 
-    
 
-       async function fetchUser()  {
+export default function DetailTabHistory({buyer, seller, historyPrice, time}: DetailTabHistoryProps) {
+    const isAuthor = buyer === '0x0000000000000000000000000000000000000000';
 
-            if (buyer) {
-              const buyerData = await getUserByAddress(buyer);
-              if (buyerData && buyerData.avatar) {
-                setAuthorImg(buyerData.avatar);
-                setAuthor(buyerData.nickname!)
-              }
-            }
-          } 
+    const {data: user} = useRequest(getUserByAddress, {
+        defaultParams: [isAuthor ? seller : buyer],
+    })
 
-        fetchUser();
 
-    
-  return (
-    <div>
-      <div className="flex-shrink-0">
-        <div className="">
-          <img
-            src={authorImg}
-            alt={author}
-            width={50}
-            height={50}
-            className="rounded-full"
-          />
+    return (
+        (user) &&
+        <div className="flex items-center">
+            <div className="flex-shrink-0">
+                <Link href={`/gallery/${user.address!}`} target="_blank" className="">
+                    <Image
+                        src={user.avatar!}
+                        alt={user.nickname!}
+                        width={50}
+                        height={50}
+                        className="rounded-full"
+                    />
+                </Link>
+            </div>
+            <div className="flex-grow-1 ms-3">
+                <p className="mb-0 text-[#000000] text-sm">
+                    {isAuthor ? 'Created By ' : 'Bought By '}
+                    {
+                        !isAuthor &&
+                        <span className="text-[#ee574c] font-bold ms-1 text-xs">
+                        {formatEther(historyPrice)} ETH
+                        </span>
+                    }
+                    <Link href={`/gallery/${user.address!}`} target="_blank" className="text-[#010708]">@{user.nickname!}</Link>
+                </p>
+                <p className="mb-0 text-[#6b6e6f] text-sm mt-1">{new Date(Number(time) * 1000).toLocaleString('en-US', {timeZone: 'UTC'})}</p>
+            </div>
         </div>
-      </div>
-      <div className="flex-grow-1 ms-3">
-        <p className="mb-0 text-[#000000] text-sm">
-          Bid Accepted By
-          <span className="text-[#ee574c] font-bold ms-1 text-xs">
-            {HistoryPrice} ETH
-          </span>
-          <span className="text-[#010708]">{author}</span>
-        </p>
-        <p className="mb-0 text-[#6b6e6f] text-sm mt-1">{time}</p>
-      </div>
-    </div>
-  );
+    );
 }
