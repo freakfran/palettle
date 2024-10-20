@@ -1,6 +1,5 @@
 'use client'
 import {getUserByAddress} from "@/backend/actions/users";
-import Image from "next/image";
 import {useRequest} from "ahooks";
 import {formatEther} from "viem";
 import Link from "next/link";
