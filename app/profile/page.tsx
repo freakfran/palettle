@@ -10,7 +10,6 @@ import {useRequest} from "ahooks";
 import {getUserByAddress, updateUserByAddress} from "@/backend/actions/users";
 import {Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
 import {Input} from "@/components/ui/input";
-import Image from "next/image";
 import {DEFAULT_AVATAR} from "@/utils/env";
 import {Textarea} from "@/components/ui/textarea";
 import {Button} from "@/components/ui/button";

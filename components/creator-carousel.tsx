@@ -4,7 +4,6 @@ import Creator, {CreatorProps} from "@/components/creator";
 import React from "react";
 import Autoplay from "embla-carousel-autoplay";
 import {Carousel, CarouselContent, CarouselItem} from "@/components/ui/carousel";
-import PicCard from "@/components/pic-card";
 
 interface CreatorCarouselProps {
     className?: string;

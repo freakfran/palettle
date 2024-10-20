@@ -1,4 +1,5 @@
 import DetailCard from "@/components/detail-card";
+
 interface PageProps {
   params: { tokenId: string }
 }
