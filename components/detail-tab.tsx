@@ -62,7 +62,7 @@ export default function DetailTab({details, tokenId}: DetailCardProps) {
                             <div
                                 className="flex flex-col items-center rounded-3xl
                                 shadow-[0px_3px_10px_0px_rgba(24,59,86,0.08)] p-7 mt-5 w-full
-                                max-h-30 hover:overflow-y-scroll scroll-smooth">
+                                max-h-30 overflow-hidden hover:overflow-y-scroll scroll-smooth">
                                 {
                                     history.map((item, index) => {
                                         return <DetailTabHistory
