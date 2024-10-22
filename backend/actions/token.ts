@@ -7,9 +7,14 @@ import {and, countDistinct, eq, or} from "drizzle-orm";
 import {inArray, like, notInArray} from "drizzle-orm/sql/expressions/conditions";
 
 export async function getTokenByUri(uri: string) {
+
+    uri = uri.replace("undefined",'beige-tremendous-leopon-72.mypinata.cloud')
+
     const response = await fetch(uri);
     const metadata: Metadata = await response.json();
-
+    if (metadata.image.includes("undefined")) {
+        metadata.image = metadata.image.replace("undefined",'beige-tremendous-leopon-72.mypinata.cloud')
+    }
     return metadata;
 }
 
@@ -198,7 +203,6 @@ export async function fetchArtworksBySearch(
                 .offset(offset)
         }
     }
-
     return {
         offset: offset,
         limit: limit,

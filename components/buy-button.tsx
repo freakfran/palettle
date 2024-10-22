@@ -41,7 +41,6 @@ export default function BuyButton({tokenId, price, className}: BuyButtonProps) {
 
     useEffect(() => {
         if (error) {
-            console.log(error)
             toast(
                 {
                     variant: "destructive",

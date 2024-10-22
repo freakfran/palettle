@@ -11,6 +11,7 @@ import {useState} from "react";
 import {getUserByAddress} from "@/backend/actions/users";
 import {formatEther} from "viem";
 import Link from "next/link";
+import {compressString} from "@/utils/common";
 
 export interface ExploreCardProps {
     className?: string;
@@ -63,7 +64,7 @@ export default function ExploreCard({
                     <AvatarImage src={author.avatar!} alt={author.nickname!}/>
                     <AvatarFallback>CN</AvatarFallback>
                 </Avatar>
-                <h6 className="ml-2 font-bold text-[14px]">{author.nickname}</h6>
+                <h6 className="ml-2 font-bold text-[14px]">{compressString(author.nickname!,10)}</h6>
             </div>
 
 

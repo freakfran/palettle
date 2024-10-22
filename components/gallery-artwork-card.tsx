@@ -46,6 +46,7 @@ export default function GalleryArtworkCard({tokenId,isMy}: GalleryArtworkCardPro
     })
 
     async function fetchArtwork(url: string) {
+        url =  url.replace("undefined",'beige-tremendous-leopon-72.mypinata.cloud')
         const data = await fetch(url)
         const metadata: Metadata = await data.json()
         if (metadata.attribution.authorAddress) {
@@ -54,6 +55,9 @@ export default function GalleryArtworkCard({tokenId,isMy}: GalleryArtworkCardPro
                 setAuthorImg(author.avatar)
                 setAuthor(author.nickname!)
             }
+        }
+        if (metadata.image.includes("undefined")) {
+            metadata.image = metadata.image.replace("undefined",'beige-tremendous-leopon-72.mypinata.cloud')
         }
         return metadata
     }
